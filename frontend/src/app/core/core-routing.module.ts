@@ -3,7 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthenticationPageComponent } from './auth/pages/authentication-page/authentication-page.component';
 
 const routes: Routes = [
-    { path: '', component: AuthenticationPageComponent },
+    {
+        path: '',
+        component: AuthenticationPageComponent
+    },
 ];
 
 @NgModule({

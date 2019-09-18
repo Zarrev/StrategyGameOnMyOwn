@@ -1,14 +1,25 @@
 p {
-    text-align: left;
-    font: Regular 93px/147px Baloo;
+    text-align: center;
+    font: 93px Regular;
     letter-spacing: 0;
     color: #9FFFF0;
     opacity: 1;
 }
 
-#title {
+#main {
     top: 153px;
-    left: 733px;
     width: 456px;
     height: 147px;
+    display: contents;
+}
+
+.rectangle_login {
+    fill:#9FFFF0;
+    stroke:whitesmoke;
+    stroke-width:5;
+    opacity:0.5;
+}
+
+#svg {
+    text-align: center;
 }
