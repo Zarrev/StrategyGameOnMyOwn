@@ -1,0 +1,7 @@
+C:\Work\GitRepo\StrategyGameOnMyOwn\backend\backend\backend.DAL\bin\Debug\netcoreapp2.2\backend.DAL.deps.json
+C:\Work\GitRepo\StrategyGameOnMyOwn\backend\backend\backend.DAL\bin\Debug\netcoreapp2.2\backend.DAL.dll
+C:\Work\GitRepo\StrategyGameOnMyOwn\backend\backend\backend.DAL\obj\Debug\netcoreapp2.2\backend.DAL.csprojAssemblyReference.cache
+C:\Work\GitRepo\StrategyGameOnMyOwn\backend\backend\backend.DAL\obj\Debug\netcoreapp2.2\backend.DAL.csproj.CoreCompileInputs.cache
+C:\Work\GitRepo\StrategyGameOnMyOwn\backend\backend\backend.DAL\obj\Debug\netcoreapp2.2\backend.DAL.AssemblyInfoInputs.cache
+C:\Work\GitRepo\StrategyGameOnMyOwn\backend\backend\backend.DAL\obj\Debug\netcoreapp2.2\backend.DAL.AssemblyInfo.cs
+C:\Work\GitRepo\StrategyGameOnMyOwn\backend\backend\backend.DAL\bin\Debug\netcoreapp2.2\backend.Model.dll
