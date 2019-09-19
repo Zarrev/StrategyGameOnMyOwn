@@ -6,7 +6,7 @@ namespace backend.DAL
 {
     public class ApplicationDbContext : IdentityDbContext
     {
-        public DbSet<Country> countries { get; set; }
+        public DbSet<Country> Countries { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(

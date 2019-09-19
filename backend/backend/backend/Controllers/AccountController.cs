@@ -6,6 +6,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using backend.DAL;
 using backend.Model;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -24,16 +25,19 @@ namespace backend.API.Controllers
         private readonly SignInManager<User> _signInManager;
         private readonly UserManager<User> _userManager;
         private readonly IConfiguration _configuration;
+        private readonly ApplicationDbContext _context;
 
         public AccountController(
             UserManager<User> userManager,
             SignInManager<User> signInManager,
-            IConfiguration configuration
+            IConfiguration configuration,
+            ApplicationDbContext context
             )
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _configuration = configuration;
+            _context = context;
         }
 
         [HttpPost]
@@ -53,6 +57,7 @@ namespace backend.API.Controllers
         [HttpPost]
         public async Task<object> Register([FromBody] RegisterDto model)
         {
+            
             var user = new User
             {
                 UserName = model.Username
@@ -62,7 +67,15 @@ namespace backend.API.Controllers
             if (result.Succeeded)
             {
                 await _signInManager.SignInAsync(user, false);
-                return await GenerateJwtToken(model.Username, user);
+                var token = await GenerateJwtToken(model.Username, user);
+                var country = new Country
+                {
+                    User = user
+                };
+                _context.Countries.Add(country);
+                await _context.SaveChangesAsync();
+
+                return token;
             }
 
             throw new ApplicationException("UNKNOWN_ERROR");
