@@ -9,7 +9,11 @@ namespace backend.DAL
         public DbSet<Country> countries { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseInMemoryDatabase("undersea");
+            optionsBuilder.UseSqlServer(
+                " Server = (localdb)\\MSSQLLocalDB;" +
+                " Database = UnderSea;" +
+                " Trusted_Connection = True;" +
+                " MultipleActiveResultSets = true;"); 
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
