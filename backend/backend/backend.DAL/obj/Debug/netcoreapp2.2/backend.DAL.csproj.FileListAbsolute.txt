@@ -5,3 +5,8 @@ C:\Work\GitRepo\StrategyGameOnMyOwn\backend\backend\backend.DAL\obj\Debug\netcor
 C:\Work\GitRepo\StrategyGameOnMyOwn\backend\backend\backend.DAL\obj\Debug\netcoreapp2.2\backend.DAL.AssemblyInfoInputs.cache
 C:\Work\GitRepo\StrategyGameOnMyOwn\backend\backend\backend.DAL\obj\Debug\netcoreapp2.2\backend.DAL.AssemblyInfo.cs
 C:\Work\GitRepo\StrategyGameOnMyOwn\backend\backend\backend.DAL\bin\Debug\netcoreapp2.2\backend.Model.dll
+C:\Work\GitRepo\StrategyGameOnMyOwn\backend\backend\backend.DAL\bin\Debug\netcoreapp2.2\backend.DAL.pdb
+C:\Work\GitRepo\StrategyGameOnMyOwn\backend\backend\backend.DAL\bin\Debug\netcoreapp2.2\backend.Model.pdb
+C:\Work\GitRepo\StrategyGameOnMyOwn\backend\backend\backend.DAL\obj\Debug\netcoreapp2.2\backend.DAL.csproj.CopyComplete
+C:\Work\GitRepo\StrategyGameOnMyOwn\backend\backend\backend.DAL\obj\Debug\netcoreapp2.2\backend.DAL.dll
+C:\Work\GitRepo\StrategyGameOnMyOwn\backend\backend\backend.DAL\obj\Debug\netcoreapp2.2\backend.DAL.pdb

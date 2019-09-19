@@ -1,6 +1,8 @@
 using backend.DAL;
+using backend.Model;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
@@ -22,16 +24,21 @@ namespace backend
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+            // ===== Add our DbContext ========
+            services.AddDbContext<ApplicationDbContext>();
+
+            // ===== Add Identity ========
+            services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";
             });
-            // services.AddDbContext<ApplicationContext>(options => options.Use);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ApplicationDbContext dbContext)
         {
             if (env.IsDevelopment())
             {
@@ -64,6 +71,9 @@ namespace backend
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
+
+            // ===== Create tables ======
+            dbContext.Database.EnsureCreated();
         }
     }
 }

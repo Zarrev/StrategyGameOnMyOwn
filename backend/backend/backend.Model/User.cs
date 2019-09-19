@@ -1,20 +1,10 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using Microsoft.AspNetCore.Identity;
 
 namespace backend.Model
 {
-    public class User
+    public class User: IdentityUser
     {
-        [Key]
-        public string key { get; set; }
-        [ForeignKey("country")]
-        public string countryKey { get; set; }
-        public Country country { get; set; }
-        public string username { get; set; }
-        public string token { get; set; }
-        public string password { get; set; }
-        public int points { get; set; }
+        public Country Country { get; set; }
 
     }
 }
