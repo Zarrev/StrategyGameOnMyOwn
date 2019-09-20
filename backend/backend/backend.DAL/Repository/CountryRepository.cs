@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace backend.DAL.Repository
@@ -39,13 +39,15 @@ namespace backend.DAL.Repository
         public async Task<IEnumerable<Country>> GetElements()
         {
             return await _context.Countries.ToListAsync();
+        }
 
-        public Country GetElementById(int elementId)
+        public async Task<Country> GetElementById(string elementId)
         {
+
             var query = from b in _context.Countries
                         where b.Id == elementId
                         select b;
-            return query.FirstOrDefault();
+                return await query.FirstOrDefaultAsync();
         }
 
         public void InsertElement(Country element)
@@ -53,7 +55,7 @@ namespace backend.DAL.Repository
             _context.Countries.Add(element);
         }
 
-        public void DeleteElement(int elementId)
+        public void DeleteElement(string elementId)
         {
             var query = from b in _context.Countries
                         where b.Id == elementId

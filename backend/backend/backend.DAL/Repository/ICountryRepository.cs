@@ -5,7 +5,7 @@ using System.Text;
 
 namespace backend.DAL.Repository
 {
-    interface ICountryRepository : IBaseRepository<Country, int>
+    public interface ICountryRepository : IBaseRepository<Country, string>
     {
         //Formally interface
     }
