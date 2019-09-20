@@ -1,4 +1,10 @@
+using backend.BLL;
+using backend.BLL.Maps;
+using backend.BLL.Maps.Interfaces;
+using backend.BLL.Services.Interfaces;
 using backend.DAL;
+using backend.DAL.Repository;
+using backend.DAL.Repository.Interfaces;
 using backend.Model;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -22,15 +28,26 @@ namespace backend
 
         public IConfiguration Configuration { get; }
 
+        private void AddScope(IServiceCollection services)
+        {
+            services.AddScoped<ICountryMap, CountryMap>();
+            services.AddScoped<ICountryService, CountryService>();
+            services.AddScoped<ICountryRepository, CountryRepository>();
+        }
+
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            // ===== Add our DbContext ========
+            // ===== Dependency Injection =====
+            this.AddScope(services);
+
+            // ===== Add DbContext =====
             services.AddDbContext<ApplicationDbContext>();
 
-            // ===== Add authentication =======
+            // ===== Add authentication =====
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => {
                 options.TokenValidationParameters = new TokenValidationParameters
                 {

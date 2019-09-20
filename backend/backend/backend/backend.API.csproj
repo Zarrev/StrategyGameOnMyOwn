@@ -26,6 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\backend.BLL\backend.BLL.csproj" />
     <ProjectReference Include="..\backend.DAL\backend.DAL.csproj" />
   </ItemGroup>
 

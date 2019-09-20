@@ -1,38 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using backend.DAL;
-using backend.Model;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using backend.Model.Frontend;
+using backend.BLL.Maps.Interfaces;
 
 namespace backend.API.Controllers
 {
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/[controller]")]
     [ApiController]
     public class CountriesController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ICountryMap _countryMap;
 
-        public CountriesController(ApplicationDbContext context)
+        public CountriesController(ICountryMap countryMap)
         {
-            _context = context;
+            _countryMap = countryMap;
         }
 
         // GET: api/Countries
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Country>>> Getcountries()
+        public async Task<ActionResult<IEnumerable<CountryView>>> Getcountries()
         {
-            return await _context.Countries.ToListAsync();
+            return await _countryMap.GetAll();
         }
 
         // GET: api/Countries/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Country>> GetCountry(string id)
+        public async Task<ActionResult<CountryView>> GetCountry(string id)
         {
-            var country = await _context.Countries.FindAsync(id);
+            var country = await _countryMap.GetElement(id);
 
             if (country == null)
             {
@@ -44,63 +43,40 @@ namespace backend.API.Controllers
 
         // PUT: api/Countries/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCountry(string id, Country country)
+        public async Task<IActionResult> PutCountry([FromRoute] string id, [FromBody] CountryView country)
         {
             if (id != country.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(country).State = EntityState.Modified;
+            _countryMap.Update(country);
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CountryExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            return Ok();
         }
 
         // POST: api/Countries
         [HttpPost]
-        public async Task<ActionResult<Country>> PostCountry(Country country)
+        public async Task<ActionResult<CountryView>> PostCountry(CountryView country)
         {
-            _context.Countries.Add(country);
-            await _context.SaveChangesAsync();
+            _countryMap.Create(country);
 
             return CreatedAtAction("GetCountry", new { id = country.Id }, country);
         }
 
         // DELETE: api/Countries/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Country>> DeleteCountry(string id)
+        public async Task<ActionResult<CountryView>> DeleteCountry(string id)
         {
-            var country = await _context.Countries.FindAsync(id);
+            var country = await _countryMap.GetElement(id);
             if (country == null)
             {
                 return NotFound();
             }
 
-            _context.Countries.Remove(country);
-            await _context.SaveChangesAsync();
+            _countryMap.Delete(id);
 
             return country;
-        }
-
-        private bool CountryExists(string id)
-        {
-            return _context.Countries.Any(e => e.Id == id);
         }
     }
 }

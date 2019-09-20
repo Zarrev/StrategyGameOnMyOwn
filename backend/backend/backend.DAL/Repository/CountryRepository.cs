@@ -1,4 +1,5 @@
-﻿using backend.Model;
+﻿using backend.DAL.Repository.Interfaces;
+using backend.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace backend.DAL.Repository
 {
-    class CountryRepository: ICountryRepository
+    public class CountryRepository: ICountryRepository
     {
         private readonly ApplicationDbContext _context;
         private bool _disposed = false;
@@ -50,9 +51,9 @@ namespace backend.DAL.Repository
                 return await query.FirstOrDefaultAsync();
         }
 
-        public void InsertElement(Country element)
+        public async void InsertElement(Country element)
         {
-            _context.Countries.Add(element);
+            await _context.Countries.AddAsync(element);
         }
 
         public void DeleteElement(string elementId)
@@ -68,11 +69,10 @@ namespace backend.DAL.Repository
             _context.Entry(element).State = EntityState.Modified;
         }
 
-        public void Save()
+        public async void Save()
         {
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
     }
 
-}
 }

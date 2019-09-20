@@ -1,0 +1,14 @@
+C:\Work\GitRepo\StrategyGameOnMyOwn\backend\backend\backend.BLL\bin\Debug\netcoreapp2.2\backend.BLL.deps.json
+C:\Work\GitRepo\StrategyGameOnMyOwn\backend\backend\backend.BLL\bin\Debug\netcoreapp2.2\backend.BLL.dll
+C:\Work\GitRepo\StrategyGameOnMyOwn\backend\backend\backend.BLL\bin\Debug\netcoreapp2.2\backend.BLL.pdb
+C:\Work\GitRepo\StrategyGameOnMyOwn\backend\backend\backend.BLL\bin\Debug\netcoreapp2.2\backend.DAL.dll
+C:\Work\GitRepo\StrategyGameOnMyOwn\backend\backend\backend.BLL\bin\Debug\netcoreapp2.2\backend.Model.dll
+C:\Work\GitRepo\StrategyGameOnMyOwn\backend\backend\backend.BLL\bin\Debug\netcoreapp2.2\backend.DAL.pdb
+C:\Work\GitRepo\StrategyGameOnMyOwn\backend\backend\backend.BLL\bin\Debug\netcoreapp2.2\backend.Model.pdb
+C:\Work\GitRepo\StrategyGameOnMyOwn\backend\backend\backend.BLL\obj\Debug\netcoreapp2.2\backend.BLL.csprojAssemblyReference.cache
+C:\Work\GitRepo\StrategyGameOnMyOwn\backend\backend\backend.BLL\obj\Debug\netcoreapp2.2\backend.BLL.csproj.CoreCompileInputs.cache
+C:\Work\GitRepo\StrategyGameOnMyOwn\backend\backend\backend.BLL\obj\Debug\netcoreapp2.2\backend.BLL.AssemblyInfoInputs.cache
+C:\Work\GitRepo\StrategyGameOnMyOwn\backend\backend\backend.BLL\obj\Debug\netcoreapp2.2\backend.BLL.AssemblyInfo.cs
+C:\Work\GitRepo\StrategyGameOnMyOwn\backend\backend\backend.BLL\obj\Debug\netcoreapp2.2\backend.BLL.csproj.CopyComplete
+C:\Work\GitRepo\StrategyGameOnMyOwn\backend\backend\backend.BLL\obj\Debug\netcoreapp2.2\backend.BLL.dll
+C:\Work\GitRepo\StrategyGameOnMyOwn\backend\backend\backend.BLL\obj\Debug\netcoreapp2.2\backend.BLL.pdb

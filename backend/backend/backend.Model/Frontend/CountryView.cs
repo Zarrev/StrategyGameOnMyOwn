@@ -1,12 +1,13 @@
-﻿namespace backend.Model
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace backend.Model.Frontend
 {
-    public class Country
+    public class CountryView
     {
         public string Id { get; set; }
-
         public string UserId { get; set; }
-        public User User { get; set; }
-
         public int Inhabitant { get; set; }
         public int Pearl { get; set; }
         public int FlowController { get; set; }
