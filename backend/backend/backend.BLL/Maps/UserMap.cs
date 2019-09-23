@@ -64,13 +64,13 @@ namespace backend.BLL.Maps
                 {
                     await _signInManager.SignOutAsync();
                     await _userManager.DeleteAsync(user);
-                    throw new ApplicationException("The user's country cannot be created! Error: " + e.Message);
+                    throw new ApplicationException("The user's country cannot be created! Error: " + e.Message));
                 }
                 _gameLogicService.testMethod();
                 return token;
             }
 
-            throw new ApplicationException("UNKNOWN_ERROR");
+            throw new ApplicationException(result.Errors.First().Description);
         }
 
         private void createReleatedCountry(User user, string countryName)

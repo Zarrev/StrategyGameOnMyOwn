@@ -12,7 +12,7 @@ export class AuthenticationService extends BaseService {
 
     private currentUserSubject: BehaviorSubject<User>;
     public currentUser: Observable<User>;
-    private specAPI = '/token';
+    private specAPI = 'account/';
 
 
     constructor(private http: HttpClient, helper: Helpers) {
@@ -33,7 +33,7 @@ export class AuthenticationService extends BaseService {
 
     login(authValues: { Password: string; Username: string; }): Observable<User> {
         const body = JSON.stringify(authValues);
-        return this.http.post<any>(environment.apiUrl + this.specAPI, body, super.header()).pipe(map(token => {
+        return this.http.post<any>(environment.apiUrl + this.specAPI + 'login', body, super.header()).pipe(map(token => {
             super.setToken(token);
             const user: User = {username: authValues.Username, token};
             this.currentUserSubject.next(user);
@@ -45,7 +45,7 @@ export class AuthenticationService extends BaseService {
 
       registration(authValues: { Password: string; RepeatedPassword: string; Username: string; CountryName: string; }): Observable<User> {
         const body = JSON.stringify(authValues);
-        return this.http.post<any>(environment.apiUrl + this.specAPI, body, super.header()).pipe(map(token => {
+        return this.http.post<any>(environment.apiUrl + this.specAPI + 'register', body, super.header()).pipe(map(token => {
             super.setToken(token);
             const user: User = {username: authValues.Username, token};
             this.currentUserSubject.next(user);

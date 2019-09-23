@@ -10,7 +10,7 @@ const routes: Routes = [
   },
   {
     path: 'country',
-    loadChildren: '.features/country/country.module#CountryModule',
+    loadChildren: './features/country/country.module#CountryModule',
     canActivate: [AuthGuardGuard]
   }
 ];

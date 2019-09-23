@@ -11,7 +11,7 @@ import { first } from 'rxjs/operators';
 })
 export class RegistrationComponent implements OnInit {
 
-  loginForm: FormGroup;
+  registerForm: FormGroup;
   submitted = false;
   returnUrl: string;
   error = '';
@@ -35,7 +35,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loginForm = this.formBuilder.group({
+    this.registerForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
       confirm_password: ['', Validators.required],
@@ -47,13 +47,13 @@ export class RegistrationComponent implements OnInit {
   }
 
   // convenience getter for easy access to form fields
-  get f() { return this.loginForm.controls; }
+  get f() { return this.registerForm.controls; }
 
   onSubmit() {
     this.submitted = true;
 
     // stop here if form is invalid
-    if (this.loginForm.invalid) {
+    if (this.registerForm.invalid) {
       return;
     }
 
