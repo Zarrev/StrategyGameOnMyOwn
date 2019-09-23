@@ -8,6 +8,8 @@ namespace backend.Model.Frontend
     {
         public string Id { get; set; }
         public string UserId { get; set; }
+
+        public string CountryName { get; set; }
         public int Inhabitant { get; set; }
         public int Pearl { get; set; }
         public int FlowController { get; set; }

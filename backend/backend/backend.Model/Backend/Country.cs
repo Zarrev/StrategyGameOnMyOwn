@@ -7,7 +7,7 @@
         public string UserId { get; set; }
         public User User { get; set; }
 
-        public string Name { get; set; }
+        public string CountryName { get; set; }
         public int Inhabitant { get; set; }
         public int Pearl { get; set; }
         public int FlowController { get; set; }

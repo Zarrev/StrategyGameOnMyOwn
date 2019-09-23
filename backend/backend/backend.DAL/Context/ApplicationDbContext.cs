@@ -11,7 +11,7 @@ namespace backend.DAL
         {
             optionsBuilder.UseSqlServer(
                 " Server = (localdb)\\MSSQLLocalDB;" +
-                " Database = UnderSea;" +
+                " Database = UnderseaDB;" +
                 " Trusted_Connection = True;" +
                 " MultipleActiveResultSets = true;"); 
         }
@@ -25,6 +25,7 @@ namespace backend.DAL
             builder.Entity<Country>().HasKey(c => c.Id);
             builder.Entity<Country>().Property(c => c.Id).ValueGeneratedOnAdd();
 
+            builder.Entity<Country>().Property(c => c.CountryName).HasMaxLength(50);
             builder.Entity<Country>().Property(c => c.Inhabitant).HasDefaultValue(100);
             builder.Entity<Country>().Property(c => c.Pearl).HasDefaultValue(500);
             builder.Entity<Country>().Property(c => c.FlowController).HasDefaultValue(0);

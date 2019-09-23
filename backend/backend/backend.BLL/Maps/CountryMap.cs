@@ -77,51 +77,53 @@ namespace backend.BLL.Maps
             return viewModels;
         }
 
-        private static CountryView InitCountryView(Country elementModel)
+        private static CountryView InitCountryView(Country model)
         {
             return new CountryView
             {
-                Id = elementModel.Id,
-                UserId = elementModel.UserId,
-                Alchemy = elementModel.Alchemy,
-                AssaultSeaDog = elementModel.AssaultSeaDog,
-                BattleSeahorse = elementModel.BattleSeahorse,
-                CoralWall = elementModel.CoralWall,
-                FlowController = elementModel.FlowController,
-                Inhabitant = elementModel.Inhabitant,
-                LaserShark = elementModel.LaserShark,
-                MudTractor = elementModel.MudTractor,
-                Pearl = elementModel.Pearl,
-                Points = elementModel.Points,
-                ReefCastle = elementModel.ReefCastle,
-                Rounds = elementModel.Rounds,
-                Sludgeharvester = elementModel.Sludgeharvester,
-                SonarGun = elementModel.SonarGun,
-                UnderwaterMaterialArts = elementModel.UnderwaterMaterialArts
+                Id = model.Id,
+                UserId = model.UserId,
+                CountryName = model.CountryName,
+                Alchemy = model.Alchemy,
+                AssaultSeaDog = model.AssaultSeaDog,
+                BattleSeahorse = model.BattleSeahorse,
+                CoralWall = model.CoralWall,
+                FlowController = model.FlowController,
+                Inhabitant = model.Inhabitant,
+                LaserShark = model.LaserShark,
+                MudTractor = model.MudTractor,
+                Pearl = model.Pearl,
+                Points = model.Points,
+                ReefCastle = model.ReefCastle,
+                Rounds = model.Rounds,
+                Sludgeharvester = model.Sludgeharvester,
+                SonarGun = model.SonarGun,
+                UnderwaterMaterialArts = model.UnderwaterMaterialArts
             };
         }
 
-        private static Country InitCountry(CountryView elementModel)
+        private static Country InitCountry(CountryView model)
         {
             return new Country
             {
-                Id = elementModel.Id,
-                UserId = elementModel.UserId,
-                Alchemy = elementModel.Alchemy,
-                AssaultSeaDog = elementModel.AssaultSeaDog,
-                BattleSeahorse = elementModel.BattleSeahorse,
-                CoralWall = elementModel.CoralWall,
-                FlowController = elementModel.FlowController,
-                Inhabitant = elementModel.Inhabitant,
-                LaserShark = elementModel.LaserShark,
-                MudTractor = elementModel.MudTractor,
-                Pearl = elementModel.Pearl,
-                Points = elementModel.Points,
-                ReefCastle = elementModel.ReefCastle,
-                Rounds = elementModel.Rounds,
-                Sludgeharvester = elementModel.Sludgeharvester,
-                SonarGun = elementModel.SonarGun,
-                UnderwaterMaterialArts = elementModel.UnderwaterMaterialArts
+                Id = model.Id,
+                UserId = model.UserId,
+                CountryName = model.CountryName,
+                Alchemy = model.Alchemy,
+                AssaultSeaDog = model.AssaultSeaDog,
+                BattleSeahorse = model.BattleSeahorse,
+                CoralWall = model.CoralWall,
+                FlowController = model.FlowController,
+                Inhabitant = model.Inhabitant,
+                LaserShark = model.LaserShark,
+                MudTractor = model.MudTractor,
+                Pearl = model.Pearl,
+                Points = model.Points,
+                ReefCastle = model.ReefCastle,
+                Rounds = model.Rounds,
+                Sludgeharvester = model.Sludgeharvester,
+                SonarGun = model.SonarGun,
+                UnderwaterMaterialArts = model.UnderwaterMaterialArts
             };
         }
     }

@@ -33,6 +33,7 @@ namespace backend
             services.AddScoped<ICountryMap, CountryMap>();
             services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<ICountryRepository, CountryRepository>();
+            services.AddScoped<IUserMap, UserMap>();
         }
 
 

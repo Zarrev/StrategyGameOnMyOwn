@@ -5,9 +5,11 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using backend.BLL.Maps.Interfaces;
 using backend.DAL;
 using backend.Model;
 using backend.Model.Frontend.Account;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -16,61 +18,29 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace backend.API.Controllers
 {
+    [AllowAnonymous]
     [Route("[controller]/[action]")]
     [ApiController]
     public class AccountController : ControllerBase
     {
-        
-        private readonly ApplicationDbContext _context;
 
-        // TODO: not releated code move to the mapper
+        private readonly IUserMap _userMap;
 
-        public AccountController(
-            
-            )
+        public AccountController(IUserMap userMap)
         {
-            
+            this._userMap = userMap;
         }
 
         [HttpPost]
         public async Task<object> Login([FromBody] LoginDto model)
         {
-            var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, false, false);
-
-            if (result.Succeeded)
-            {
-                var appUser = _userManager.Users.SingleOrDefault(r => r.UserName == model.Username);
-                return await GenerateJwtToken(model.Username, appUser);
-            }
-
-            throw new ApplicationException("INVALID_LOGIN_ATTEMPT");
+            return await this._userMap.Login(model);
         }
 
         [HttpPost]
         public async Task<object> Register([FromBody] RegisterDto model)
         {
-            
-            var user = new User
-            {
-                UserName = model.Username
-            };
-            var result = await _userManager.CreateAsync(user, model.Password);
-
-            if (result.Succeeded)
-            {
-                await _signInManager.SignInAsync(user, false);
-                var token = await GenerateJwtToken(model.Username, user);
-                var country = new Country
-                {
-                    User = user
-                };
-                _context.Countries.Add(country);
-                await _context.SaveChangesAsync();
-
-                return token;
-            }
-
-            throw new ApplicationException("UNKNOWN_ERROR");
+            return await this._userMap.Register(model);
         }
     }
 }

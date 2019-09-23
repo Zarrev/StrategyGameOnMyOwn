@@ -7,47 +7,79 @@ using backend.Model.Frontend.Account;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
-using backend.DAL;
-using backend.Model;
-using backend.Model.Frontend.Account;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using System.Linq;
+using backend.BLL.Services.Interfaces;
 
 namespace backend.BLL.Maps
 {
-
-    // TODO: move things from accountcontroller
     public class UserMap : IUserMap
     {
         private readonly SignInManager<User> _signInManager;
         private readonly UserManager<User> _userManager;
         private readonly IConfiguration _configuration;
+        private readonly ICountryService _countryService;
 
-        public UserMap(UserManager<User> userManager, SignInManager<User> signInManager, IConfiguration configuration)
+        public UserMap(UserManager<User> userManager, SignInManager<User> signInManager, IConfiguration configuration, ICountryService countryService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _configuration = configuration;
+            _countryService = countryService;
         }
-
-        public object JwtRegisteredClaimNames { get; private set; }
 
         public async Task<object> Login(LoginDto model)
         {
-            throw new System.NotImplementedException();
+            var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, false, false);
+
+            if (result.Succeeded)
+            {
+                var appUser = _userManager.Users.SingleOrDefault(r => r.UserName == model.Username);
+                return await GenerateJwtToken(model.Username, appUser);
+            }
+
+            throw new ApplicationException("INVALID_LOGIN_ATTEMPT");
         }
 
         public async Task<object> Register(RegisterDto model)
         {
-            throw new System.NotImplementedException();
+            var user = new User
+            {
+                UserName = model.Username
+            };
+            var result = await _userManager.CreateAsync(user, model.Password);
+
+            if (result.Succeeded)
+            {
+                await _signInManager.SignInAsync(user, false);
+                var token = await GenerateJwtToken(model.Username, user);
+                try
+                {
+                    this.createReleatedCountry(user, model.CountryName);
+                } catch (Exception e)
+                {
+                    await _signInManager.SignOutAsync();
+                    await _userManager.DeleteAsync(user);
+                    throw new ApplicationException("The user's country cannot be created! Error: " + e.Message);
+                }
+
+                return token;
+            }
+
+            throw new ApplicationException("UNKNOWN_ERROR");
+        }
+
+        private void createReleatedCountry(User user, string countryName)
+        {
+            var country = new Country
+            {
+                User = user,
+                CountryName = countryName
+
+            };
+            this._countryService.InsertElement(country);
         }
 
         private async Task<object> GenerateJwtToken(string username, User user)
