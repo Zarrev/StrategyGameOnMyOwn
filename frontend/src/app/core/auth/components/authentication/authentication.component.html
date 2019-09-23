@@ -1,0 +1,10 @@
+<form class="items" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <p id="subtitle" class="item">Login</p>
+    <input formControlName="username" required id="username" type="text" class="item" placeholder="Username" />
+    <input formControlName="password" required id="password" type="password" class="item" placeholder="Password" />
+    <button id="submit" type="submit" class="item" [disabled]="!loginForm.valid">Sign in</button>
+    <a [routerLink]="['/registration']" routerLinkActive="router-link-active" class="item">Registration</a>
+    <div *ngIf="error != ''" >
+        <p style="color: crimson"><br />{{error}}</p>
+    </div>
+</form>
