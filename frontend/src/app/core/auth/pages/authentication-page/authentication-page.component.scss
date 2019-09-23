@@ -1,0 +1,35 @@
+#title {
+    font-size: 93px;
+}
+
+#main {
+    top: 153px;
+    width: 456px;
+    height: 147px;
+    display: contents;
+}
+
+.rectangle_login {
+    fill:#9FFFF0;
+    stroke:whitesmoke;
+    stroke-width:5;
+    opacity:0.5;
+}
+
+#svg {
+    text-align: center;
+}
+
+.svgcontainer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    color: grey;
+    margin-top: 20%
+}
+
+.container {
+    position: relative;
+  }
