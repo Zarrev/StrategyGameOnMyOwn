@@ -1,0 +1,203 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Work\\GitRepo\\StrategyGameOnMyOwn\\backend\\backend\\backend.BLL\\backend.BLL.csproj": {}
+  },
+  "projects": {
+    "C:\\Work\\GitRepo\\StrategyGameOnMyOwn\\backend\\backend\\backend.BLL\\backend.BLL.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Work\\GitRepo\\StrategyGameOnMyOwn\\backend\\backend\\backend.BLL\\backend.BLL.csproj",
+        "projectName": "backend.BLL",
+        "projectPath": "C:\\Work\\GitRepo\\StrategyGameOnMyOwn\\backend\\backend\\backend.BLL\\backend.BLL.csproj",
+        "packagesPath": "C:\\Users\\barko.zsolt\\.nuget\\packages\\",
+        "outputPath": "C:\\Work\\GitRepo\\StrategyGameOnMyOwn\\backend\\backend\\backend.BLL\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\barko.zsolt\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "projectReferences": {
+              "C:\\Work\\GitRepo\\StrategyGameOnMyOwn\\backend\\backend\\backend.DAL\\backend.DAL.csproj": {
+                "projectPath": "C:\\Work\\GitRepo\\StrategyGameOnMyOwn\\backend\\backend\\backend.DAL\\backend.DAL.csproj"
+              },
+              "C:\\Work\\GitRepo\\StrategyGameOnMyOwn\\backend\\backend\\backend.Model\\backend.Model.csproj": {
+                "projectPath": "C:\\Work\\GitRepo\\StrategyGameOnMyOwn\\backend\\backend\\backend.Model\\backend.Model.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "dependencies": {
+            "Hangfire.AspNetCore": {
+              "target": "Package",
+              "version": "[1.7.6, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    },
+    "C:\\Work\\GitRepo\\StrategyGameOnMyOwn\\backend\\backend\\backend.DAL\\backend.DAL.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Work\\GitRepo\\StrategyGameOnMyOwn\\backend\\backend\\backend.DAL\\backend.DAL.csproj",
+        "projectName": "backend.DAL",
+        "projectPath": "C:\\Work\\GitRepo\\StrategyGameOnMyOwn\\backend\\backend\\backend.DAL\\backend.DAL.csproj",
+        "packagesPath": "C:\\Users\\barko.zsolt\\.nuget\\packages\\",
+        "outputPath": "C:\\Work\\GitRepo\\StrategyGameOnMyOwn\\backend\\backend\\backend.DAL\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\barko.zsolt\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "projectReferences": {
+              "C:\\Work\\GitRepo\\StrategyGameOnMyOwn\\backend\\backend\\backend.Model\\backend.Model.csproj": {
+                "projectPath": "C:\\Work\\GitRepo\\StrategyGameOnMyOwn\\backend\\backend\\backend.Model\\backend.Model.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[2.2.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.InMemory": {
+              "target": "Package",
+              "version": "[2.2.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[2.2.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[2.2.6, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    },
+    "C:\\Work\\GitRepo\\StrategyGameOnMyOwn\\backend\\backend\\backend.Model\\backend.Model.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Work\\GitRepo\\StrategyGameOnMyOwn\\backend\\backend\\backend.Model\\backend.Model.csproj",
+        "projectName": "backend.Model",
+        "projectPath": "C:\\Work\\GitRepo\\StrategyGameOnMyOwn\\backend\\backend\\backend.Model\\backend.Model.csproj",
+        "packagesPath": "C:\\Users\\barko.zsolt\\.nuget\\packages\\",
+        "outputPath": "C:\\Work\\GitRepo\\StrategyGameOnMyOwn\\backend\\backend\\backend.Model\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\barko.zsolt\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    }
+  }
+}
