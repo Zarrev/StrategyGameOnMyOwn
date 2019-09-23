@@ -12,7 +12,6 @@ import { first } from 'rxjs/operators';
 export class AuthenticationComponent implements OnInit {
 
   loginForm: FormGroup;
-  loading = false;
   submitted = false;
   returnUrl: string;
   error = '';
@@ -25,7 +24,7 @@ export class AuthenticationComponent implements OnInit {
   ) {
     // redirect to home if already logged in
     if (this.authenticationService.currentUserValue) {
-      this.router.navigate(['/']);
+      this.router.navigate(['/country']);
     }
   }
 
@@ -50,8 +49,7 @@ export class AuthenticationComponent implements OnInit {
       return;
     }
 
-    this.loading = true;
-    this.authenticationService.login(this.f.username.value, this.f.password.value)
+    this.authenticationService.login({password: this.f.password.value, username: this.f.username.value})
       .pipe(first())
       .subscribe(
         data => {
@@ -59,7 +57,6 @@ export class AuthenticationComponent implements OnInit {
         },
         error => {
           this.error = error;
-          this.loading = false;
         });
   }
 

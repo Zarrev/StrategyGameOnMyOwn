@@ -4,17 +4,21 @@ import { AuthenticationPageComponent } from './auth/pages/authentication-page/au
 import { AuthenticationComponent } from './auth/components/authentication/authentication.component';
 import { CoreRoutingModule } from './core-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { RegistrationComponent } from './auth/components/registration/registration.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
     declarations: [
         AuthenticationPageComponent,
-        AuthenticationComponent
+        AuthenticationComponent,
+        RegistrationComponent
     ],
     imports: [
         FormsModule,
         ReactiveFormsModule,
         CoreRoutingModule,
-        HttpClientModule
+        HttpClientModule,
+        CommonModule
     ],
     providers: []
 })
