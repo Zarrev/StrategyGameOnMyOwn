@@ -5,7 +5,7 @@ import { AuthenticationComponent } from './auth/components/authentication/authen
 import { CoreRoutingModule } from './core-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { RegistrationComponent } from './auth/components/registration/registration.component';
-import { CommonModule } from '@angular/common';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
     declarations: [
@@ -18,7 +18,7 @@ import { CommonModule } from '@angular/common';
         ReactiveFormsModule,
         CoreRoutingModule,
         HttpClientModule,
-        CommonModule
+        SharedModule
     ],
     providers: []
 })

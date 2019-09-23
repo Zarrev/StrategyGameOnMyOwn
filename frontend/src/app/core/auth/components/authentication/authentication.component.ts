@@ -49,7 +49,7 @@ export class AuthenticationComponent implements OnInit {
       return;
     }
 
-    this.authenticationService.login({password: this.f.password.value, username: this.f.username.value})
+    this.authenticationService.login({Password: this.f.password.value, Username: this.f.username.value})
       .pipe(first())
       .subscribe(
         data => {
