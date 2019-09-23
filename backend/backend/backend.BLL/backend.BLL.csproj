@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Hangfire.AspNetCore" Version="1.7.6" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\backend.DAL\backend.DAL.csproj" />
     <ProjectReference Include="..\backend.Model\backend.Model.csproj" />
   </ItemGroup>

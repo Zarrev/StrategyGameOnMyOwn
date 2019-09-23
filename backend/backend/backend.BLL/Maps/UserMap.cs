@@ -21,13 +21,15 @@ namespace backend.BLL.Maps
         private readonly UserManager<User> _userManager;
         private readonly IConfiguration _configuration;
         private readonly ICountryService _countryService;
+        private readonly IGameLogicService _gameLogicService;
 
-        public UserMap(UserManager<User> userManager, SignInManager<User> signInManager, IConfiguration configuration, ICountryService countryService)
+        public UserMap(UserManager<User> userManager, SignInManager<User> signInManager, IConfiguration configuration, ICountryService countryService, IGameLogicService gameLogicService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _configuration = configuration;
             _countryService = countryService;
+            _gameLogicService = gameLogicService;
         }
 
         public async Task<object> Login(LoginDto model)
@@ -64,7 +66,7 @@ namespace backend.BLL.Maps
                     await _userManager.DeleteAsync(user);
                     throw new ApplicationException("The user's country cannot be created! Error: " + e.Message);
                 }
-
+                _gameLogicService.testMethod();
                 return token;
             }
 
