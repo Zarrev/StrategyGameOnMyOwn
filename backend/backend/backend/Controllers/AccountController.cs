@@ -1,19 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using backend.BLL.Maps.Interfaces;
-using backend.DAL;
-using backend.Model;
 using backend.Model.Frontend.Account;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
 
 
 namespace backend.API.Controllers
@@ -32,15 +22,33 @@ namespace backend.API.Controllers
         }
 
         [HttpPost]
-        public async Task<object> Login([FromBody] LoginDto model)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> Login([FromBody] LoginDto model)
         {
-            return await this._userMap.Login(model);
+            var task = await this._userMap.Login(model);
+
+            if (task[1].Equals(_userMap.Ok))
+            {
+                return Ok(new { token = task[0] });
+            }
+
+            return BadRequest(new { error = task[0]});
         }
 
         [HttpPost]
-        public async Task<object> Register([FromBody] RegisterDto model)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> Register([FromBody] RegisterDto model)
         {
-            return await this._userMap.Register(model);
+            var task = await this._userMap.Register(model);
+
+            if (task[1].Equals(_userMap.Ok))
+            {
+                return Ok(new { token = task[0] });
+            }
+
+            return BadRequest(new { error = task[0] });
         }
     }
 }

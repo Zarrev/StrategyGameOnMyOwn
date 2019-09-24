@@ -32,20 +32,24 @@ namespace backend.BLL.Maps
             _gameLogicService = gameLogicService;
         }
 
-        public async Task<object> Login(LoginDto model)
+        public string Invalid { get { return "INVALID"; } }
+
+        public string Ok { get { return "OK"; } }
+
+        public async Task<string[]> Login(LoginDto model)
         {
             var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, false, false);
 
             if (result.Succeeded)
             {
                 var appUser = _userManager.Users.SingleOrDefault(r => r.UserName == model.Username);
-                return await GenerateJwtToken(model.Username, appUser);
+                return new string[] { GenerateJwtToken(model.Username, appUser), this.Ok };
             }
 
-            throw new ApplicationException("INVALID_LOGIN_ATTEMPT");
+            return new string[] { result.ToString(), this.Invalid };
         }
 
-        public async Task<object> Register(RegisterDto model)
+        public async Task<string[]> Register(RegisterDto model)
         {
             var user = new User
             {
@@ -56,24 +60,24 @@ namespace backend.BLL.Maps
             if (result.Succeeded)
             {
                 await _signInManager.SignInAsync(user, false);
-                var token = await GenerateJwtToken(model.Username, user);
+                var token = GenerateJwtToken(model.Username, user);
                 try
                 {
-                    this.createReleatedCountry(user, model.CountryName);
+                    this.CreateReleatedCountry(user, model.CountryName);
                 } catch (Exception e)
                 {
                     await _signInManager.SignOutAsync();
                     await _userManager.DeleteAsync(user);
-                    throw new ApplicationException("The user's country cannot be created! Error: " + e.Message));
+                    return new string[] { e.Message, this.Invalid };
                 }
                 _gameLogicService.testMethod();
-                return token;
+                return new string[] { token, this.Ok };
             }
 
-            throw new ApplicationException(result.Errors.First().Description);
+            return new string[] { result.Errors.First().Description, this.Invalid };
         }
 
-        private void createReleatedCountry(User user, string countryName)
+        private void CreateReleatedCountry(User user, string countryName)
         {
             var country = new Country
             {
@@ -84,7 +88,7 @@ namespace backend.BLL.Maps
             this._countryService.InsertElement(country);
         }
 
-        private async Task<object> GenerateJwtToken(string username, User user)
+        private string GenerateJwtToken(string username, User user)
         {
             var claims = new List<Claim>
             {
