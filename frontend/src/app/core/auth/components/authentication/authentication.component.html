@@ -4,7 +4,4 @@
     <input formControlName="password" required id="password" type="password" class="item" placeholder="Password" />
     <button id="submit" type="submit" class="item" [disabled]="!loginForm.valid">Sign in</button>
     <a [routerLink]="['/registration']" routerLinkActive="router-link-active" class="item">Registration</a>
-    <div *ngIf="error != ''" >
-        <p style="color: crimson"><br />{{error}}</p>
-    </div>
 </form>

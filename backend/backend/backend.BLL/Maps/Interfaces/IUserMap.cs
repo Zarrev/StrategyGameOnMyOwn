@@ -7,7 +7,8 @@ namespace backend.BLL.Maps.Interfaces
     {
         string Invalid { get; }
         string Ok { get; }
-        Task<string[]> Login(LoginDto model);
-        Task<string[]> Register(RegisterDto model);
+        Task<object[]> Login(LoginDto model);
+        Task<object[]> Register(RegisterDto model);
+        Task<object[]> LogOut();
     }
 }

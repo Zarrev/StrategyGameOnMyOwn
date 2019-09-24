@@ -10,5 +10,4 @@ export class AuthenticationPageComponent implements OnInit {
   ngOnInit(): void {
     console.log('Authentication Page has loaded!');
   }
-
 }

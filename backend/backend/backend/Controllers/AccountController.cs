@@ -50,5 +50,20 @@ namespace backend.API.Controllers
 
             return BadRequest(new { error = task[0] });
         }
+
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> LogOut()
+        {
+            var task = await this._userMap.LogOut();
+
+            if (task[1].Equals(_userMap.Ok))
+            {
+                return Ok(new { message = task[0] });
+            }
+
+            return BadRequest(new { error = task[0] });
+        }
     }
 }

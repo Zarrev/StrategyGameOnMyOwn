@@ -14,7 +14,6 @@ export class RegistrationComponent implements OnInit {
   registerForm: FormGroup;
   submitted = false;
   returnUrl: string;
-  error = '';
   checkPasswords = (group: FormGroup) => {
     const pass = group.get('password').value;
     const confirmPass = group.get('confirm_password').value;
@@ -64,9 +63,6 @@ export class RegistrationComponent implements OnInit {
       .subscribe(
         data => {
           this.router.navigate([this.returnUrl]);
-        },
-        error => {
-          this.error = error;
         });
   }
 }

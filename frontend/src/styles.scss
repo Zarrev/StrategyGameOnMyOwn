@@ -12,3 +12,11 @@ p {
     color: #9FFFF0;
     opacity: 1;
 }
+
+.rounded_input {
+    border-radius: 25px;
+    border: 2px solid rgb(22, 162, 204);
+    padding: 20px; 
+    width: 200px;
+    height: 15px;    
+}

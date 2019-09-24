@@ -6,6 +6,8 @@ import { User } from '../models/user';
 import { environment } from 'src/environments/environment';
 import { BaseService } from './base.service';
 import { Helpers } from 'src/app/utils/helper';
+import * as jwt_decode from 'jwt-decode';
+import { ToastService } from 'src/app/shared/services/toast.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService extends BaseService {
@@ -13,11 +15,23 @@ export class AuthenticationService extends BaseService {
     private currentUserSubject: BehaviorSubject<User>;
     public currentUser: Observable<User>;
     private specAPI = 'account/';
+    private helperLogOut: () => void;
 
 
-    constructor(private http: HttpClient, helper: Helpers) {
-        super(helper);
-        this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem(environment.localStorageTokenKey)));
+    constructor(private http: HttpClient, toastService: ToastService, helper: Helpers) {
+        super(helper, toastService);
+        this.helperLogOut = () => {
+          helper.logout();
+          this.currentUserSubject.next(null);
+        };
+
+        if (Helpers.isAuthenticated()) {
+          const token = Helpers.getToken();
+          const user: User = {username: jwt_decode(token), token};
+          this.currentUserSubject = new BehaviorSubject<User>(user);
+        } else {
+          this.currentUserSubject = new BehaviorSubject<User>(null);
+        }
         this.currentUser = this.currentUserSubject.asObservable();
     }
 
@@ -26,9 +40,7 @@ export class AuthenticationService extends BaseService {
     }
 
     logout() {
-        // remove user from local storage to log user out
-        localStorage.removeItem(environment.localStorageTokenKey);
-        this.currentUserSubject.next(null);
+        this.helperLogOut();
     }
 
     login(authValues: { Password: string; Username: string; }): Observable<User> {

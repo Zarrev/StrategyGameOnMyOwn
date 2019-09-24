@@ -14,7 +14,6 @@ export class AuthenticationComponent implements OnInit {
   loginForm: FormGroup;
   submitted = false;
   returnUrl: string;
-  error = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -54,9 +53,6 @@ export class AuthenticationComponent implements OnInit {
       .subscribe(
         data => {
           this.router.navigate([this.returnUrl]);
-        },
-        error => {
-          this.error = error;
         });
   }
 

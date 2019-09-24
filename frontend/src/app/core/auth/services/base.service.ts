@@ -1,12 +1,13 @@
-import {Injectable} from '@angular/core';
-import {Observable, throwError} from 'rxjs';
-import {HttpHeaders} from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable, throwError } from 'rxjs';
+import { HttpHeaders } from '@angular/common/http';
 import { Helpers } from 'src/app/utils/helper';
+import { ToastService } from 'src/app/shared/services/toast.service';
 
 @Injectable()
 export class BaseService {
 
-  constructor(private helper: Helpers) {
+  constructor(private helper: Helpers, private toastService: ToastService) {
   }
 
   public extractData(res: Response): any {
@@ -14,29 +15,24 @@ export class BaseService {
   }
 
   public handleError(error: Response | any): Observable<never> {
-    let errMsg: string;
-
-    if (error instanceof Response) {
-      const body = error.json() || '';
-      const err = body || JSON.stringify(body);
-      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
-    } else {
-      errMsg = error.message ? error.message : error.toString();
-    }
-
-    console.log(errMsg);
-
-    return throwError(errMsg);
+    console.log(error.status);
+    console.log(error.statusText);
+    let errorList = '';
+    error.error.error.forEach(element => {
+      errorList = errorList + element + '\n';
+    });
+    this.toastService.setError(error.status + ' ' + error.statusText, errorList);
+    return throwError(errorList);
   }
 
   public header(): { [key: string]: HttpHeaders } {
-    let header = new HttpHeaders({'Content-Type': 'application/json'});
+    let header = new HttpHeaders({ 'Content-Type': 'application/json' });
 
     if (Helpers.isAuthenticated()) {
       header = header.append('Authorization', 'Bearer ' + Helpers.getToken());
     }
 
-    return {headers: header};
+    return { headers: header };
   }
 
   public setToken(data: any) {

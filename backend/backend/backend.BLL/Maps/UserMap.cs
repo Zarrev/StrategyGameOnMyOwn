@@ -36,20 +36,20 @@ namespace backend.BLL.Maps
 
         public string Ok { get { return "OK"; } }
 
-        public async Task<string[]> Login(LoginDto model)
+        public async Task<object[]> Login(LoginDto model)
         {
             var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, false, false);
 
             if (result.Succeeded)
             {
                 var appUser = _userManager.Users.SingleOrDefault(r => r.UserName == model.Username);
-                return new string[] { GenerateJwtToken(model.Username, appUser), this.Ok };
+                return new object[] { GenerateJwtToken(model.Username, appUser), this.Ok };
             }
 
-            return new string[] { result.ToString(), this.Invalid };
+            return new object[] { result.ToString(), this.Invalid };
         }
 
-        public async Task<string[]> Register(RegisterDto model)
+        public async Task<object[]> Register(RegisterDto model)
         {
             var user = new User
             {
@@ -68,13 +68,28 @@ namespace backend.BLL.Maps
                 {
                     await _signInManager.SignOutAsync();
                     await _userManager.DeleteAsync(user);
-                    return new string[] { e.Message, this.Invalid };
+                    return new object[] { e.Message, this.Invalid };
                 }
-                _gameLogicService.testMethod();
-                return new string[] { token, this.Ok };
+                // just for test
+                //_gameLogicService.testMethod();
+                return new object[] { token, this.Ok };
             }
 
-            return new string[] { result.Errors.First().Description, this.Invalid };
+            return new object[] { result.Errors.Select(x => x.Description), this.Invalid };
+        }
+
+        public async Task<object[]> LogOut()
+        {
+            try
+            {
+                await _signInManager.SignOutAsync();
+            } catch (Exception e)
+            {
+                return new object[] { e.Message, this.Invalid };
+            }
+
+            return new object[] { "Signed out", this.Ok };
+            
         }
 
         private void CreateReleatedCountry(User user, string countryName)
@@ -111,5 +126,7 @@ namespace backend.BLL.Maps
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+
+        //private string[] CollectErrorResults()
     }
 }
