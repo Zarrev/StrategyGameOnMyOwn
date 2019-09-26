@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuardGuard } from './core/guards/auth-guard.guard';
-import { InternalErrorComponent } from './shared/components/internal-error/internal-error.component';
 
 
 const routes: Routes = [
@@ -13,10 +12,6 @@ const routes: Routes = [
     path: 'country',
     loadChildren: './features/country/country.module#CountryModule',
     canActivate: [AuthGuardGuard]
-  },
-  {
-    path: 'error',
-    component: InternalErrorComponent
   }
 ];
 

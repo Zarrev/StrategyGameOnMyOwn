@@ -1,15 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ToastComponent } from './components/toast/toast.component';
-import { InternalErrorComponent } from './components/internal-error/internal-error.component';
 
 
 
 @NgModule({
-  declarations: [ToastComponent, InternalErrorComponent],
+  declarations: [ToastComponent],
   imports: [
     CommonModule
   ],
-  exports: [CommonModule, ToastComponent, InternalErrorComponent]
+  exports: [CommonModule, ToastComponent]
 })
 export class SharedModule { }

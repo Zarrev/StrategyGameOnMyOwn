@@ -6,13 +6,14 @@ import {Observable, Subject} from 'rxjs';
 })
 export class Helpers {
 
+  public static tokenKey = 'token';
   private authenticationChanged = new Subject<boolean>();
 
   constructor() {
   }
 
   public static isAuthenticated(): boolean {
-    const token = window.localStorage.getItem('token');
+    const token = window.localStorage.getItem(Helpers.tokenKey);
     return (
       token !== undefined &&
       token !== null &&
@@ -26,7 +27,7 @@ export class Helpers {
       return '';
     }
 
-    return JSON.parse(window.localStorage.getItem('token')).token;
+    return JSON.parse(window.localStorage.getItem(Helpers.tokenKey)).message;
   }
 
   public isAuthenticationChanged(): Observable<boolean> {
@@ -46,7 +47,7 @@ export class Helpers {
   }
 
   private setStorageToken(value: any): void {
-    window.localStorage.setItem('token', value);
+    window.localStorage.setItem(Helpers.tokenKey, value);
     this.authenticationChanged.next(Helpers.isAuthenticated());
   }
 }

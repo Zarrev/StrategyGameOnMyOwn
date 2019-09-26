@@ -3,12 +3,11 @@ import { Observable, throwError } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
 import { Helpers } from 'src/app/utils/helper';
 import { ToastService } from 'src/app/shared/services/toast.service';
-import { InternalErrorService } from 'src/app/shared/services/internal-error.service';
 
 @Injectable()
 export class BaseService {
 
-  constructor(private helper: Helpers, private toastService: ToastService, private internalErrorService: InternalErrorService) {
+  constructor(private helper: Helpers, private toastService: ToastService) {
   }
 
   public extractData(res: Response): any {
@@ -16,14 +15,14 @@ export class BaseService {
   }
 
   public handleError(error: Response | any): Observable<never> {
-    if (error.status === 500) {
-      this.internalErrorService.htmlTemplate = error.error;
-      return throwError(error.message);
-    }
     const errorList = [];
-    error.error.error.forEach((element: string) => {
-      errorList.push(element);
-    });
+    if (error.status !== 500) {
+      error.error.error.forEach((element: string) => {
+        errorList.push(element);
+      });
+    } else {
+      errorList.push(error.message);
+    }
     this.toastService.setError({errorCode: error.status + ' ' + error.statusText + ':', errorMessages: errorList});
     return throwError(errorList);
   }
