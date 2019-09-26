@@ -4,10 +4,10 @@ namespace backend.Model.Frontend.Account
 {
     public class LoginDto
     {
-        [Required]
+        [Required(ErrorMessage = "{0} is required.")]
         public string Username { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "{0} is required.")]
         public string Password { get; set; }
 
     }

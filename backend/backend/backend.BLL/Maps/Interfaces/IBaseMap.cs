@@ -9,9 +9,9 @@ namespace backend.BLL.Maps.Interfaces
     {
         Task<TViewModel> GetElement(string elementViewModelId);
         Task<List<TViewModel>> GetAll();
-        void Create(TViewModel elementViewModel);
-        void Delete(string elementViewModelId);
-        void Update(TViewModel elementViewModel);
+        Task Create(TViewModel elementViewModel);
+        Task Delete(string elementViewModelId);
+        Task Update(TViewModel elementViewModel);
     }
 
 }

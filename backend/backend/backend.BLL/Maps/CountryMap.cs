@@ -26,19 +26,19 @@ namespace backend.BLL.Maps
             return await _service.GetElements().ContinueWith(task => CountryMap.DomainToViewModel(task.Result));
         }
 
-        public void Create(CountryView elementViewModel)
+        public async Task Create(CountryView elementViewModel)
         {
-            _service.InsertElement(ViewModelToDomain(elementViewModel));
+            await _service.InsertElement(ViewModelToDomain(elementViewModel));
         }
 
-        public void Delete(string elementViewModelId)
+        public async Task Delete(string elementViewModelId)
         {
-            _service.DeleteElement(elementViewModelId);
+            await _service.DeleteElement(elementViewModelId);
         }
 
-        public void Update(CountryView elementViewModel)
+        public async Task Update(CountryView elementViewModel)
         {
-            _service.UpdateElement(ViewModelToDomain(elementViewModel));
+            await _service.UpdateElement(ViewModelToDomain(elementViewModel));
         }
 
         private static Country ViewModelToDomain(CountryView elementViewModel)

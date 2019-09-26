@@ -6,12 +6,12 @@ import { Subject } from 'rxjs';
 })
 export class ToastService {
 
-  private _error = new Subject<string>();
+  private _error = new Subject<{errorCode: string; errorMessages: string[];}>();
 
   constructor() { }
 
-  public setError(errorCode: string, errorMessage: string) {
-    this._error.next(errorCode + ': ' + errorMessage);
+  public setError(errorContent: {errorCode: string; errorMessages: string[];}) {
+    this._error.next(errorContent);
   }
 
   get error() {

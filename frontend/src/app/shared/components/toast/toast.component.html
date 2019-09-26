@@ -1,1 +1,8 @@
-<div id="snackbar">{{message}}</div>
+<div id="snackbar">
+    <b><u>{{errorC}}</u></b>
+    <ul>
+        <li *ngFor="let error of errorMs">
+            <b>{{error}}</b>
+        </li>
+    </ul>
+</div>

@@ -47,5 +47,7 @@ namespace backend.DAL
             builder.Entity<User>().HasOne(u => u.Country).WithOne(c => c.User).HasForeignKey<Country>(c => c.UserId);
 
         }
+
+
     }
 }

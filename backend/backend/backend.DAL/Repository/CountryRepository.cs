@@ -51,27 +51,28 @@ namespace backend.DAL.Repository
                 return await query.FirstOrDefaultAsync();
         }
 
-        public async void InsertElement(Country element)
+        public async Task InsertElement(Country element)
         {
             await _context.Countries.AddAsync(element);
         }
 
-        public void DeleteElement(string elementId)
+        public async Task DeleteElement(string elementId)
         {
             var query = from b in _context.Countries
                         where b.Id == elementId
                         select b;
-            _context.Countries.Remove(query.FirstOrDefault() ?? throw new InvalidOperationException());
+            
+            _context.Countries.Remove( await query.FirstOrDefaultAsync() ?? throw new InvalidOperationException());
         }
 
-        public void UpdateElement(Country element)
+        public async Task UpdateElement(Country element)
         {
             _context.Entry(element).State = EntityState.Modified;
         }
 
-        public async void Save()
+        public async Task Save()
         {
-            await _context.SaveChangesAsync();
+             await _context.SaveChangesAsync();
         }
     }
 

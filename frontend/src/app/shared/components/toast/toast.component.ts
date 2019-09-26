@@ -9,12 +9,14 @@ import { ToastService } from '../../services/toast.service';
 export class ToastComponent implements AfterViewInit {
 
   @Input() errorC?: string;
-  @Input() errorM?: string;
-  private message: string;
+  @Input() errorMs?: string[];
 
   constructor(private toastService: ToastService) {
-    this.message = this.errorC + ': ' + this.errorM;
-    toastService.error.subscribe(msg => this.message = msg);
+    toastService.error.subscribe(errorContent => {
+      this.errorC = errorContent.errorCode;
+      this.errorMs = errorContent.errorMessages;
+      this.trigger();
+    });
   }
 
   ngAfterViewInit(): void {
@@ -22,14 +24,16 @@ export class ToastComponent implements AfterViewInit {
   }
 
   trigger() {
-    if ((this.errorC !== undefined && this.errorM !== undefined) || this.message !== 'undefined: undefined') {
+    if (this.errorC !== undefined && this.errorMs !== undefined) {
       const x = document.getElementById('snackbar');
 
-      // Add the "show" class to DIV
       x.className = 'show';
 
-      // After 3 seconds, remove the show class from DIV
-      setTimeout(() => { x.className = x.className.replace('show', ''); }, 3000);
+      setTimeout(() => {
+        x.className = x.className.replace('show', '');
+        this.errorC = undefined;
+        this.errorMs = undefined;
+      }, 10000);
     }
   }
 

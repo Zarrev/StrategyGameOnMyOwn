@@ -9,10 +9,10 @@ namespace backend.DAL.Repository
     {
         Task<IEnumerable<T>> GetElements();
         Task<T> GetElementById(K elementId);
-        void InsertElement(T element);
-        void DeleteElement(K elementId);
-        void UpdateElement(T element);
-        void Save();
+        Task InsertElement(T element);
+        Task DeleteElement(K elementId);
+        Task UpdateElement(T element);
+        Task Save();
     }
 
 }

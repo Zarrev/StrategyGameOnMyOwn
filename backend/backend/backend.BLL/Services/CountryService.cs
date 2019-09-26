@@ -25,22 +25,22 @@ namespace backend.BLL
             return await _repository.GetElementById(elementId);
         }
 
-        public void InsertElement(Country element)
+        public async Task InsertElement(Country element)
         {
-            _repository.InsertElement(element);
-            _repository.Save();
+            await _repository.InsertElement(element);
+            await _repository.Save();
         }
 
-        public void DeleteElement(string elementId)
+        public async Task DeleteElement(string elementId)
         {
-            _repository.DeleteElement(elementId);
-            _repository.Save();
+            await _repository.DeleteElement(elementId);
+            await _repository.Save();
         }
 
-        public void UpdateElement(Country element)
+        public async Task UpdateElement(Country element)
         {
-            _repository.UpdateElement(element);
-            _repository.Save();
+            await _repository.UpdateElement(element);
+            await _repository.Save();
         }
 
     }

@@ -1,10 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using backend.BLL.Classes;
 using backend.BLL.Maps.Interfaces;
 using backend.Model.Frontend.Account;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-
 
 namespace backend.API.Controllers
 {
@@ -18,7 +19,7 @@ namespace backend.API.Controllers
 
         public AccountController(IUserMap userMap)
         {
-            this._userMap = userMap;
+            _userMap = userMap;
         }
 
         [HttpPost]
@@ -26,14 +27,7 @@ namespace backend.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Login([FromBody] LoginDto model)
         {
-            var task = await this._userMap.Login(model);
-
-            if (task[1].Equals(_userMap.Ok))
-            {
-                return Ok(new { token = task[0] });
-            }
-
-            return BadRequest(new { error = task[0]});
+            return SendRespons(await _userMap.Login(model));
         }
 
         [HttpPost]
@@ -41,14 +35,7 @@ namespace backend.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Register([FromBody] RegisterDto model)
         {
-            var task = await this._userMap.Register(model);
-
-            if (task[1].Equals(_userMap.Ok))
-            {
-                return Ok(new { token = task[0] });
-            }
-
-            return BadRequest(new { error = task[0] });
+            return SendRespons(await _userMap.Register(model));
         }
 
         [HttpPost]
@@ -56,14 +43,37 @@ namespace backend.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> LogOut()
         {
-            var task = await this._userMap.LogOut();
+            return SendRespons(await _userMap.LogOut());
+        }
 
-            if (task[1].Equals(_userMap.Ok))
+        private List<string> CollectErrorMessages()
+        {
+            var errorMessages = new List<string>();
+            if (!ModelState.IsValid)
             {
-                return Ok(new { message = task[0] });
+                foreach (var modelState in ModelState.Values)
+                {
+                    foreach (var error in modelState.Errors)
+                    {
+                        errorMessages.Add(error.ErrorMessage);
+                    }
+                }
             }
 
-            return BadRequest(new { error = task[0] });
+            return errorMessages;
+        }
+
+        private ObjectResult SendRespons(UserResponseContainer userResponseContainer)
+        {
+            var errorMessages = CollectErrorMessages();
+
+            if (userResponseContainer.Validity.Equals(_userMap.Ok))
+            {
+                return Ok(new { message = userResponseContainer.Result[0] });
+            }
+
+            errorMessages.AddRange(userResponseContainer.Result);
+            return BadRequest(new { error = errorMessages.ToArray() });
         }
     }
 }

@@ -8,6 +8,7 @@ import { BaseService } from './base.service';
 import { Helpers } from 'src/app/utils/helper';
 import * as jwt_decode from 'jwt-decode';
 import { ToastService } from 'src/app/shared/services/toast.service';
+import { InternalErrorService } from 'src/app/shared/services/internal-error.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService extends BaseService {
@@ -18,8 +19,8 @@ export class AuthenticationService extends BaseService {
     private helperLogOut: () => void;
 
 
-    constructor(private http: HttpClient, toastService: ToastService, helper: Helpers) {
-        super(helper, toastService);
+    constructor(private http: HttpClient, internalErrorService: InternalErrorService, toastService: ToastService, helper: Helpers) {
+        super(helper, toastService, internalErrorService);
         this.helperLogOut = () => {
           helper.logout();
           this.currentUserSubject.next(null);
@@ -27,7 +28,7 @@ export class AuthenticationService extends BaseService {
 
         if (Helpers.isAuthenticated()) {
           const token = Helpers.getToken();
-          const user: User = {username: jwt_decode(token), token};
+          const user: User = {username: jwt_decode(token).sub, token};
           this.currentUserSubject = new BehaviorSubject<User>(user);
         } else {
           this.currentUserSubject = new BehaviorSubject<User>(null);

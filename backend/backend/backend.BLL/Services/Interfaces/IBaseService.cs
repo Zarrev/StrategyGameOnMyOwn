@@ -9,9 +9,9 @@ namespace backend.BLL.Services.Interfaces
     {
         Task<List<T>> GetElements();
         Task<T> GetElementById(K elementId);
-        void InsertElement(T element);
-        void DeleteElement(K elementId);
-        void UpdateElement(T element);
+        Task InsertElement(T element);
+        Task DeleteElement(K elementId);
+        Task UpdateElement(T element);
     }
 
 }

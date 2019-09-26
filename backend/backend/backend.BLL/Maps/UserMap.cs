@@ -12,6 +12,7 @@ using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using System.Linq;
 using backend.BLL.Services.Interfaces;
+using backend.BLL.Classes;
 
 namespace backend.BLL.Maps
 {
@@ -36,21 +37,26 @@ namespace backend.BLL.Maps
 
         public string Ok { get { return "OK"; } }
 
-        public async Task<object[]> Login(LoginDto model)
+        public async Task<UserResponseContainer> Login(LoginDto model)
         {
             var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, false, false);
 
             if (result.Succeeded)
             {
                 var appUser = _userManager.Users.SingleOrDefault(r => r.UserName == model.Username);
-                return new object[] { GenerateJwtToken(model.Username, appUser), this.Ok };
+                return new UserResponseContainer { Result = new List<string> { GenerateJwtToken(model.Username, appUser) }, Validity = this.Ok };
             }
 
-            return new object[] { result.ToString(), this.Invalid };
+            return new UserResponseContainer { Result = new List<string> { "The username or/and password is invalid." }, Validity = this.Invalid };
         }
 
-        public async Task<object[]> Register(RegisterDto model)
+        public async Task<UserResponseContainer> Register(RegisterDto model)
         {
+            var errors = new List<string>();
+            if (model.Password != model.RepeatedPassword)
+            {
+                errors.Add("The password mismatched with the confirmation password");
+            }
             var user = new User
             {
                 UserName = model.Username
@@ -63,36 +69,36 @@ namespace backend.BLL.Maps
                 var token = GenerateJwtToken(model.Username, user);
                 try
                 {
-                    this.CreateReleatedCountry(user, model.CountryName);
+                    await this.CreateReleatedCountry(user, model.CountryName);
                 } catch (Exception e)
                 {
                     await _signInManager.SignOutAsync();
                     await _userManager.DeleteAsync(user);
-                    return new object[] { e.Message, this.Invalid };
+                    errors.Add(e.Message);
                 }
                 // just for test
                 //_gameLogicService.testMethod();
-                return new object[] { token, this.Ok };
+                return new UserResponseContainer { Result = new List<string> { token }, Validity = this.Ok };
             }
 
-            return new object[] { result.Errors.Select(x => x.Description), this.Invalid };
+            return new UserResponseContainer { Result = errors.Concat(result.Errors.Select(x => x.Description)).ToList() , Validity = this.Invalid };
         }
 
-        public async Task<object[]> LogOut()
+        public async Task<UserResponseContainer> LogOut()
         {
             try
             {
                 await _signInManager.SignOutAsync();
             } catch (Exception e)
             {
-                return new object[] { e.Message, this.Invalid };
+                return new UserResponseContainer { Result = new List<string> { e.Message }, Validity = this.Invalid };
             }
 
-            return new object[] { "Signed out", this.Ok };
+            return new UserResponseContainer { Result = new List<string> { "Signed out" }, Validity = this.Ok };
             
         }
 
-        private void CreateReleatedCountry(User user, string countryName)
+        private async Task CreateReleatedCountry(User user, string countryName)
         {
             var country = new Country
             {
@@ -100,7 +106,7 @@ namespace backend.BLL.Maps
                 CountryName = countryName
 
             };
-            this._countryService.InsertElement(country);
+            await this._countryService.InsertElement(country);
         }
 
         private string GenerateJwtToken(string username, User user)
