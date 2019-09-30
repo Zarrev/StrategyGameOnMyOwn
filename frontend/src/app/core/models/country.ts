@@ -1,0 +1,20 @@
+class Country {
+    public Id: string;
+    public UserId: string;
+    public CountryName: string;
+    public Inhabitant: number;
+    public Pearl: number;
+    public FlowController: number;
+    public ReefCastle: number;
+    public AssaultSeaDog: number;
+    public BattleSeahorse: number;
+    public LaserShark: number;
+    public Points: number;
+    public Rounds: number;
+    public MudTractor: boolean;
+    public Sludgeharvester: boolean;
+    public CoralWall: boolean;
+    public SonarGun: boolean;
+    public UnderwaterMaterialArts: boolean;
+    public Alchemy: boolean;
+}

@@ -16,6 +16,7 @@ export class BaseService {
 
   public handleError(error: Response | any): Observable<never> {
     const errorList = [];
+    console.log(error);
     if (error.status !== 500) {
       error.error.error.forEach((element: string) => {
         errorList.push(element);

@@ -39,6 +39,7 @@ namespace backend
             services.AddScoped<ICountryRepository, CountryRepository>();
             services.AddScoped<IUserMap, UserMap>();
             services.AddScoped<IGameLogicService, GameLogicService>();
+            services.AddSingleton<IRoundService, RoundService>();
         }
 
         private static void ConfigureHangfire(IServiceCollection services)

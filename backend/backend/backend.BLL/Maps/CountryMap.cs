@@ -21,6 +21,11 @@ namespace backend.BLL.Maps
             return await _service.GetElementById(elementViewModelId).ContinueWith(task => CountryMap.DomainToViewModel(task.Result));
         }
 
+        public async Task<CountryView> GetElementByUser(string userId)
+        {
+            return await _service.GetElementByUserId(userId).ContinueWith(task => CountryMap.DomainToViewModel(task.Result));
+        }
+
         public async Task<List<CountryView>> GetAll()
         {
             return await _service.GetElements().ContinueWith(task => CountryMap.DomainToViewModel(task.Result));

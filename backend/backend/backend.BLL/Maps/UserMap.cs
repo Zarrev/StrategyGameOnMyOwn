@@ -22,15 +22,15 @@ namespace backend.BLL.Maps
         private readonly UserManager<User> _userManager;
         private readonly IConfiguration _configuration;
         private readonly ICountryService _countryService;
-        private readonly IGameLogicService _gameLogicService;
+        //private readonly IGameLogicService _gameLogicService;
 
-        public UserMap(UserManager<User> userManager, SignInManager<User> signInManager, IConfiguration configuration, ICountryService countryService, IGameLogicService gameLogicService)
+        public UserMap(UserManager<User> userManager, SignInManager<User> signInManager, IConfiguration configuration, ICountryService countryService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _configuration = configuration;
             _countryService = countryService;
-            _gameLogicService = gameLogicService;
+            //_gameLogicService = gameLogicService;
         }
 
         public string Invalid { get { return "INVALID"; } }
@@ -115,9 +115,9 @@ namespace backend.BLL.Maps
             {
                 new Claim(JwtRegisteredClaimNames.Sub, username),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(ClaimTypes.NameIdentifier, user.Id)
+                new Claim("userId", user.Id)
             };
-
+            
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtKey"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
             var expires = DateTime.Now.AddDays(Convert.ToDouble(_configuration["JwtExpireDays"]));
@@ -132,7 +132,5 @@ namespace backend.BLL.Maps
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
-
-        //private string[] CollectErrorResults()
     }
 }

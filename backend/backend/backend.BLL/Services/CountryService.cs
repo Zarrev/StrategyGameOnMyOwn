@@ -25,6 +25,11 @@ namespace backend.BLL
             return await _repository.GetElementById(elementId);
         }
 
+        public async Task<Country> GetElementByUserId(string userId)
+        {
+            return await _repository.getElementByUserId(userId);
+        }
+
         public async Task InsertElement(Country element)
         {
             await _repository.InsertElement(element);

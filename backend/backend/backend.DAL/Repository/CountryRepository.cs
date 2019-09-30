@@ -48,7 +48,15 @@ namespace backend.DAL.Repository
             var query = from b in _context.Countries
                         where b.Id == elementId
                         select b;
-                return await query.FirstOrDefaultAsync();
+            return await query.FirstOrDefaultAsync();
+        }
+
+        public async Task<Country> getElementByUserId(string userId)
+        {
+            var query = from b in _context.Countries
+                        where b.UserId == userId
+                        select b;
+            return await query.FirstOrDefaultAsync();
         }
 
         public async Task InsertElement(Country element)

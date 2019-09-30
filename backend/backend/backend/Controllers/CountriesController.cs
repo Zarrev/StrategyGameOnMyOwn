@@ -41,6 +41,20 @@ namespace backend.API.Controllers
             return country;
         }
 
+        // GET: api/Countries/5
+        [HttpGet("byuser/{userId}")]
+        public async Task<ActionResult<CountryView>> GetCountryByUser(string userId)
+        {
+            var country = await _countryMap.GetElementByUser(userId);
+
+            if (country == null)
+            {
+                return NotFound();
+            }
+
+            return country;
+        }
+
         // PUT: api/Countries/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCountry([FromRoute] string id, [FromBody] CountryView country)
