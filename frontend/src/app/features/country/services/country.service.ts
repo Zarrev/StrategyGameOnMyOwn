@@ -12,14 +12,14 @@ import { map, catchError } from 'rxjs/operators';
 })
 export class CountryService extends BaseService {
 
-  private specAPI = 'countries/byuser';
+  private specAPI = 'countries/mycountry';
 
   constructor(private http: HttpClient, toastService: ToastService, helper: Helpers) {
     super(helper, toastService);
   }
 
-  getCountryByUserId(userId: string): Observable<Country> {
-    return this.http.get<Country>(environment.apiUrl + this.specAPI + '/' + userId, super.header()).pipe(
+  getUserCountry(): Observable<Country> {
+    return this.http.get<Country>(environment.apiUrl + this.specAPI, super.header()).pipe(
       map(country => {
         return country;
       }),

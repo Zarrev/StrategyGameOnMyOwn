@@ -2,9 +2,11 @@ using backend.BLL;
 using backend.BLL.Maps;
 using backend.BLL.Maps.Interfaces;
 using backend.BLL.Services;
+using backend.BLL.Services.AbstractClasses;
 using backend.BLL.Services.Interfaces;
 using backend.DAL;
 using backend.DAL.Repository;
+using backend.DAL.Repository.AbstractClasses;
 using backend.DAL.Repository.Interfaces;
 using backend.Model;
 using Hangfire;
@@ -39,6 +41,8 @@ namespace backend
             services.AddScoped<ICountryRepository, CountryRepository>();
             services.AddScoped<IUserMap, UserMap>();
             services.AddScoped<IGameLogicService, GameLogicService>();
+            services.AddScoped<AUserRepository, UserRepository>();
+            services.AddScoped<AUserService, UserService>();
             services.AddSingleton<IRoundService, RoundService>();
         }
 

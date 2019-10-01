@@ -60,7 +60,7 @@ export class AuthenticationService extends BaseService {
   }
 
   private nextUser(token: any): User {
-    const user: User = { username: jwt_decode(token).sub, token, userId: jwt_decode(token).userId };
+    const user: User = { username: jwt_decode(token).sub, token};
     this.currentUserSubject.next(user);
     return user;
   }

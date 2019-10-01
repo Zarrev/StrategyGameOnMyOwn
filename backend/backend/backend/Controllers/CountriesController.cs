@@ -41,6 +41,21 @@ namespace backend.API.Controllers
             return country;
         }
 
+        // GET: api/Countries/mycountry
+        [HttpGet("mycountry")]
+        public async Task<ActionResult<CountryView>> GetCountryForUser()
+        {
+            var id = HttpContext.User.Identity.Name;
+            var country = await _countryMap.GetElementByUser(id);
+
+            if (country == null)
+            {
+                return NotFound();
+            }
+
+            return country;
+        }
+
         // GET: api/Countries/5
         [HttpGet("byuser/{userId}")]
         public async Task<ActionResult<CountryView>> GetCountryByUser(string userId)
@@ -92,5 +107,7 @@ namespace backend.API.Controllers
 
             return country;
         }
+
+
     }
 }

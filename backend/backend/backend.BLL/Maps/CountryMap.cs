@@ -131,6 +131,62 @@ namespace backend.BLL.Maps
                 UnderwaterMaterialArts = model.UnderwaterMaterialArts
             };
         }
+
+        public async Task<int> GetInhabitant()
+        {
+            return 0;
+        }
+
+        public async Task<int> GetPearlNumber()
+        {
+            return 0;
+        }
+
+        public async Task<int> GetFlowControllerNumber()
+        {
+            return 0;
+        }
+
+        public async Task<int> GetReefCastleNumber()
+        {
+            return 0;
+        }
+
+        public async Task<int> GetAssaultSeaDogNumber()
+        {
+            return 0;
+        }
+
+        public async Task<int> GetBattleSeahorseNumber()
+        {
+            return 0;
+        }
+
+        public async Task<int> GetLaserSharkNumber()
+        {
+            return 0;
+        }
+
+        public async Task<int> GetPoints()
+        {
+            return 0;
+        }
+
+        public async Task<List<bool>> GetDevelopments()
+        {
+            return new List<bool>();
+        }
+
+        public async Task<int> GetAttackValue()
+        {
+            return 0;
+        }
+
+        public async Task FireNextRound()
+        {
+            return 0;
+        }
+
     }
 
 }

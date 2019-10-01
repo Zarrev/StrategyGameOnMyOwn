@@ -21,7 +21,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscription.push(this.authenticationService.currentUser.subscribe(user => {
       this.user = user;
-      this.subscription.push(this.countryService.getCountryByUserId(user.userId).subscribe(country => this.country = country));
+      this.subscription.push(this.countryService.getUserCountry().subscribe(country => this.country = country));
     }));
   }
 
