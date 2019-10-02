@@ -25,12 +25,12 @@ export class ToastComponent implements AfterViewInit {
 
   trigger() {
     if (this.errorC !== undefined && this.errorMs !== undefined) {
-      const x = document.getElementById('snackbar');
+      const x = document.getElementById('snack');
 
-      x.className = 'show';
+      x.className = x.className + ' show';
 
       setTimeout(() => {
-        x.className = x.className.replace('show', '');
+        x.className = x.className.replace(' show', '');
         this.errorC = undefined;
         this.errorMs = undefined;
       }, 10000);
