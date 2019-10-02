@@ -52,7 +52,7 @@ namespace backend
                 .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
                 .UseSimpleAssemblyNameTypeSerializer()
                 .UseRecommendedSerializerSettings()
-                .UseSqlServerStorage("Server = (localdb)\\MSSQLLocalDB; Database=UnderseaDB; Integrated Security=True;", new SqlServerStorageOptions
+                .UseSqlServerStorage("Server = (localdb)\\MSSQLLocalDB; Database=UnderseaDataBase; Integrated Security=True;", new SqlServerStorageOptions
                 {
                     CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
                     SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),

@@ -23,7 +23,8 @@ namespace backend.BLL.Maps
 
         public async Task<CountryView> GetElementByUser(string userId)
         {
-            return await _service.GetElementByUserId(userId).ContinueWith(task => CountryMap.DomainToViewModel(task.Result));
+            var result = await _service.GetElementByUserId(userId);
+            return CountryMap.DomainToViewModel(result);
         }
 
         public async Task<List<CountryView>> GetAll()
@@ -89,6 +90,8 @@ namespace backend.BLL.Maps
                 Id = model.Id,
                 UserId = model.UserId,
                 CountryName = model.CountryName,
+                DevelopingName = model.DevelopingName,
+                BuildingName = model.BuildingName,
                 Alchemy = model.Alchemy,
                 AssaultSeaDog = model.AssaultSeaDog,
                 BattleSeahorse = model.BattleSeahorse,
@@ -100,7 +103,8 @@ namespace backend.BLL.Maps
                 Pearl = model.Pearl,
                 Points = model.Points,
                 ReefCastle = model.ReefCastle,
-                Rounds = model.Rounds,
+                DevRounds = model.DevRounds,
+                BuildRounds = model.BuildRounds,
                 Sludgeharvester = model.Sludgeharvester,
                 SonarGun = model.SonarGun,
                 UnderwaterMaterialArts = model.UnderwaterMaterialArts
@@ -114,6 +118,8 @@ namespace backend.BLL.Maps
                 Id = model.Id,
                 UserId = model.UserId,
                 CountryName = model.CountryName,
+                DevelopingName = model.DevelopingName,
+                BuildingName = model.BuildingName,
                 Alchemy = model.Alchemy,
                 AssaultSeaDog = model.AssaultSeaDog,
                 BattleSeahorse = model.BattleSeahorse,
@@ -125,68 +131,89 @@ namespace backend.BLL.Maps
                 Pearl = model.Pearl,
                 Points = model.Points,
                 ReefCastle = model.ReefCastle,
-                Rounds = model.Rounds,
+                DevRounds = model.DevRounds,
+                BuildRounds = model.BuildRounds,
                 Sludgeharvester = model.Sludgeharvester,
                 SonarGun = model.SonarGun,
                 UnderwaterMaterialArts = model.UnderwaterMaterialArts
             };
         }
 
-        public async Task<int> GetInhabitant()
+        public async Task<int> GetInhabitant(string userId)
         {
-            return 0;
+            return await _service.GetElementByUserId(userId).ContinueWith(task => task.Result.Inhabitant);
         }
 
-        public async Task<int> GetPearlNumber()
+        public async Task<int> GetPearlNumber(string userId)
         {
-            return 0;
+            return await _service.GetElementByUserId(userId).ContinueWith(task => task.Result.Pearl);
         }
 
-        public async Task<int> GetFlowControllerNumber()
+        public async Task<int> GetFlowControllerNumber(string userId)
         {
-            return 0;
+            return await _service.GetElementByUserId(userId).ContinueWith(task => task.Result.FlowController);
         }
 
-        public async Task<int> GetReefCastleNumber()
+        public async Task<int> GetReefCastleNumber(string userId)
         {
-            return 0;
+            return await _service.GetElementByUserId(userId).ContinueWith(task => task.Result.ReefCastle);
         }
 
-        public async Task<int> GetAssaultSeaDogNumber()
+        public async Task<int> GetAssaultSeaDogNumber(string userId)
         {
-            return 0;
+            return await _service.GetElementByUserId(userId).ContinueWith(task => task.Result.AssaultSeaDog);
         }
 
-        public async Task<int> GetBattleSeahorseNumber()
+        public async Task<int> GetBattleSeahorseNumber(string userId)
         {
-            return 0;
+            return await _service.GetElementByUserId(userId).ContinueWith(task => task.Result.BattleSeahorse);
         }
 
-        public async Task<int> GetLaserSharkNumber()
+        public async Task<int> GetLaserSharkNumber(string userId)
         {
-            return 0;
+            return await _service.GetElementByUserId(userId).ContinueWith(task => task.Result.LaserShark);
         }
 
-        public async Task<int> GetPoints()
+        public async Task<int> GetPoints(string userId)
         {
-            return 0;
+            await _service.CalcPoints(userId);
+            return await _service.GetElementByUserId(userId).ContinueWith(task => task.Result.Points);
         }
 
-        public async Task<List<bool>> GetDevelopments()
+        public async Task<List<bool>> GetDevelopments(string userId)
         {
-            return new List<bool>();
+            return await _service.GetDevelopments(userId);
         }
 
-        public async Task<int> GetAttackValue()
+        public async Task<int> GetAttackValue(string userId)
         {
-            return 0;
+            return await _service.GetAttackValue(userId);
         }
 
-        public async Task FireNextRound()
+        public async Task<int> GetDefenseValue(string userId)
         {
-            return 0;
+            return await _service.GetDefenseValue(userId);
         }
 
+        public async Task<CountryView> FireNextRound(string userId)
+        {
+            var country = await _service.FinishRound(userId);
+            return await Task.FromResult(DomainToViewModel(country));
+        }
+
+        public async Task Build(string userId, int buildingType)
+        {
+            await _service.Build(userId, buildingType);
+        }
+
+        public async Task Develop(string userId, int developType)
+        {
+            await _service.Build(userId, developType);
+        }
+        
+        public async Task HireMercenary(string userId, MercenaryRequest mercenaryList)
+        {
+            await _service.HireMercenary(userId, mercenaryList);
+        }
     }
-
 }

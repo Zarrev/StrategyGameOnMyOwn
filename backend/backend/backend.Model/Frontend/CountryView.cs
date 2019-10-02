@@ -10,6 +10,8 @@ namespace backend.Model.Frontend
         public string UserId { get; set; }
 
         public string CountryName { get; set; }
+        public int DevelopingName { get; set; }
+        public int BuildingName { get; set; }
         public int Inhabitant { get; set; }
         public int Pearl { get; set; }
         public int FlowController { get; set; }
@@ -18,7 +20,8 @@ namespace backend.Model.Frontend
         public int BattleSeahorse { get; set; }
         public int LaserShark { get; set; }
         public int Points { get; set; }
-        public int Rounds { get; set; }
+        public int DevRounds { get; set; }
+        public int BuildRounds { get; set; }
         public bool MudTractor { get; set; }
         public bool Sludgeharvester { get; set; }
         public bool CoralWall { get; set; }

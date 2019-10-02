@@ -4,6 +4,6 @@ namespace backend.Model
 {
     public class User: IdentityUser
     {
-        public Country Country { get; set; }
+        public virtual Country Country { get; set; }
     }
 }
