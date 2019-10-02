@@ -1,9 +1,26 @@
-<form class="items" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-    <p id="subtitle" class="item">Registration</p>
-    <input formControlName="username" required id="username" type="text" class="item" placeholder="Username" />
-    <input formControlName="password" required id="password" type="password" class="item" placeholder="Password" />
-    <input formControlName="confirm_password" required id="confirm_password" type="password" class="item" placeholder="Confirm password" />
-    <input formControlName="city_name" required id="city_name" type="text" class="item" placeholder="City's name what you build" />
-    <button id="submit" type="submit" class="item" [disabled]="!controlsValidity">Sign up & in</button>
-    <a [routerLink]="['/login']" routerLinkActive="router-link-active" class="item">Sign in</a>
-</form>
+<div class="back w-50 d-flex justify-content-center" style="margin:auto">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <h3 class="outline">Registration</h3>
+            <div class="form-group">
+                <input class="form-control" formControlName="username" required id="username" type="text"
+                    placeholder="Username" />
+            </div>
+            <div class="form-group">
+                <input class="form-control" formControlName="password" required id="password" type="password"
+                    placeholder="Password" />
+            </div>
+            <div class="form-group">
+                <input class="form-control" formControlName="confirm_password" required id="confirm_password"
+                    type="password" placeholder="Confirm password" />
+            </div>
+            <div class="form-group">
+            <input class="form-control" formControlName="city_name" required id="city_name" type="text"
+                placeholder="City's name what you build" />
+            </div>
+            <button type="submit" class="btn btn-primary" [disabled]="!controlsValidity">Sign up & in</button>
+            <button type="button" class="btn btn-link" [routerLink]="['/login']"
+                routerLinkActive="router-link-active">Sign in</button>
+        </div>
+    </form>
+</div>
