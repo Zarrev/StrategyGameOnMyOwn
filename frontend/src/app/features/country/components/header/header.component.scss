@@ -1,0 +1,13 @@
+@import "~bootstrap/scss/bootstrap";
+
+img {
+    vertical-align: middle;
+    height: 45px;
+    width: 45px;
+}
+
+.row-w-m {
+    @extend .row;
+    margin-left: 0%;
+    margin-right: 0%;
+}

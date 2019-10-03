@@ -190,58 +190,42 @@ namespace backend.DAL.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<bool>("Alchemy")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValue(false);
+                    b.Property<bool>("Alchemy");
 
-                    b.Property<int>("AssaultSeaDog")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValue(0);
+                    b.Property<int>("AssaultSeaDog");
 
-                    b.Property<int>("BattleSeahorse")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValue(0);
+                    b.Property<int>("BattleSeahorse");
 
-                    b.Property<int>("BuildRounds")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValue(0);
+                    b.Property<int>("BuildRounds");
 
                     b.Property<int>("BuildingName")
-                        .HasMaxLength(50);
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(-1);
 
                     b.Property<int>("Coral")
                         .ValueGeneratedOnAdd()
                         .HasDefaultValue(500);
 
-                    b.Property<bool>("CoralWall")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValue(false);
+                    b.Property<bool>("CoralWall");
 
                     b.Property<string>("CountryName")
                         .HasMaxLength(50);
 
-                    b.Property<int>("DevRounds")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValue(0);
+                    b.Property<int>("DevRounds");
 
                     b.Property<int>("DevelopingName")
-                        .HasMaxLength(50);
-
-                    b.Property<int>("FlowController")
                         .ValueGeneratedOnAdd()
-                        .HasDefaultValue(0);
+                        .HasDefaultValue(-1);
+
+                    b.Property<int>("FlowController");
 
                     b.Property<int>("Inhabitant")
                         .ValueGeneratedOnAdd()
                         .HasDefaultValue(100);
 
-                    b.Property<int>("LaserShark")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValue(0);
+                    b.Property<int>("LaserShark");
 
-                    b.Property<bool>("MudTractor")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValue(false);
+                    b.Property<bool>("MudTractor");
 
                     b.Property<int>("Pearl")
                         .ValueGeneratedOnAdd()
@@ -251,21 +235,13 @@ namespace backend.DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasDefaultValue(100);
 
-                    b.Property<int>("ReefCastle")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValue(0);
+                    b.Property<int>("ReefCastle");
 
-                    b.Property<bool>("Sludgeharvester")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValue(false);
+                    b.Property<bool>("Sludgeharvester");
 
-                    b.Property<bool>("SonarGun")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValue(false);
+                    b.Property<bool>("SonarGun");
 
-                    b.Property<bool>("UnderwaterMaterialArts")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValue(false);
+                    b.Property<bool>("UnderwaterMaterialArts");
 
                     b.Property<string>("UserId");
 

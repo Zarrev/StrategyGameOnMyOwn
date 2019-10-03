@@ -1,0 +1,28 @@
+@import "~bootstrap/scss/bootstrap";
+
+.row-w-m {
+    @extend .row;
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
+img {
+    width: 70px;
+    height: 90px;
+}
+
+.back {
+    padding: 0.75rem 1.25rem;
+    border-radius: 16px;
+    opacity: 1;
+    // filter: blur(8px);
+    // -webkit-filter: blur(8px);
+    background: rgba(255, 255, 255, 0.5);
+
+}
+
+.fixed-bottom {
+    bottom: 0px;
+    position: fixed;
+    margin-bottom: 30px;
+}

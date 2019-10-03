@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace backend.DAL.Repository
 {
-    public class CountryRepository: ICountryRepository
+    public class CountryRepository : ICountryRepository
     {
         private readonly ApplicationDbContext _context;
         private bool _disposed = false;
@@ -69,8 +69,8 @@ namespace backend.DAL.Repository
             var query = from b in _context.Countries
                         where b.Id == elementId
                         select b;
-            
-            _context.Countries.Remove( await query.FirstOrDefaultAsync() ?? throw new InvalidOperationException());
+
+            _context.Countries.Remove(await query.FirstOrDefaultAsync() ?? throw new InvalidOperationException());
         }
 
         public async Task UpdateElement(Country element)
@@ -80,7 +80,20 @@ namespace backend.DAL.Repository
 
         public async Task Save()
         {
-             await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<int> getCurrentRank(string userId)
+        {
+            var index = 1;
+            var query = from country in _context.Countries
+                        orderby country.Points descending
+                        select new { Country = country, Rank = index+1 };
+            var query2 = from countryWithRank in query
+                         where countryWithRank.Country.UserId == userId
+                         select countryWithRank.Rank;
+
+            return await query2.FirstOrDefaultAsync();
         }
     }
 

@@ -8,6 +8,7 @@ namespace backend.BLL.Services.Interfaces
     public interface ICountryService: IBaseService<Country, string>
     {
         Task<Country> GetElementByUserId(string userId);
+        Task<int> GetRank(string userId);
         Task CalcPoints(string userId);
         Task<List<bool>> GetDevelopments(string userId);
         Task<int> GetAttackValue(string userId);

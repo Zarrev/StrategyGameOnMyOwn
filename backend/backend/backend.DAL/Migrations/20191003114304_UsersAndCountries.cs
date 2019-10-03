@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace backend.DAL.Migrations
 {
-    public partial class Countriesd : Migration
+    public partial class UsersAndCountries : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -161,25 +161,25 @@ namespace backend.DAL.Migrations
                     Id = table.Column<string>(nullable: false),
                     UserId = table.Column<string>(nullable: true),
                     CountryName = table.Column<string>(maxLength: 50, nullable: true),
-                    DevelopingName = table.Column<int>(maxLength: 50, nullable: false),
-                    BuildingName = table.Column<int>(maxLength: 50, nullable: false),
+                    DevelopingName = table.Column<int>(nullable: false, defaultValue: -1),
+                    BuildingName = table.Column<int>(nullable: false, defaultValue: -1),
                     Inhabitant = table.Column<int>(nullable: false, defaultValue: 100),
                     Coral = table.Column<int>(nullable: false, defaultValue: 500),
                     Pearl = table.Column<int>(nullable: false, defaultValue: 500),
-                    FlowController = table.Column<int>(nullable: false, defaultValue: 0),
-                    ReefCastle = table.Column<int>(nullable: false, defaultValue: 0),
-                    AssaultSeaDog = table.Column<int>(nullable: false, defaultValue: 0),
-                    BattleSeahorse = table.Column<int>(nullable: false, defaultValue: 0),
-                    LaserShark = table.Column<int>(nullable: false, defaultValue: 0),
+                    FlowController = table.Column<int>(nullable: false),
+                    ReefCastle = table.Column<int>(nullable: false),
+                    AssaultSeaDog = table.Column<int>(nullable: false),
+                    BattleSeahorse = table.Column<int>(nullable: false),
+                    LaserShark = table.Column<int>(nullable: false),
                     Points = table.Column<int>(nullable: false, defaultValue: 100),
-                    DevRounds = table.Column<int>(nullable: false, defaultValue: 0),
-                    BuildRounds = table.Column<int>(nullable: false, defaultValue: 0),
-                    MudTractor = table.Column<bool>(nullable: false, defaultValue: false),
-                    Sludgeharvester = table.Column<bool>(nullable: false, defaultValue: false),
-                    CoralWall = table.Column<bool>(nullable: false, defaultValue: false),
-                    SonarGun = table.Column<bool>(nullable: false, defaultValue: false),
-                    UnderwaterMaterialArts = table.Column<bool>(nullable: false, defaultValue: false),
-                    Alchemy = table.Column<bool>(nullable: false, defaultValue: false)
+                    DevRounds = table.Column<int>(nullable: false),
+                    BuildRounds = table.Column<int>(nullable: false),
+                    MudTractor = table.Column<bool>(nullable: false),
+                    Sludgeharvester = table.Column<bool>(nullable: false),
+                    CoralWall = table.Column<bool>(nullable: false),
+                    SonarGun = table.Column<bool>(nullable: false),
+                    UnderwaterMaterialArts = table.Column<bool>(nullable: false),
+                    Alchemy = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {

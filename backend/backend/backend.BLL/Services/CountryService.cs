@@ -18,6 +18,11 @@ namespace backend.BLL
             _repository = repository;
         }
 
+        public async Task<int> GetRank(string userId)
+        {
+            return await _repository.getCurrentRank(userId);
+        }
+
         public async Task<List<Country>> GetElements()
         {
             return await _repository.GetElements().ContinueWith(task => (List<Country>) task.Result);

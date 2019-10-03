@@ -13,6 +13,7 @@ using System.Linq;
 using backend.BLL.Services.AbstractClasses;
 using backend.BLL.Services.Interfaces;
 
+
 namespace backend.BLL.Services
 {
     public class UserService : AUserService
@@ -22,7 +23,8 @@ namespace backend.BLL.Services
         private readonly IConfiguration _configuration;
         private readonly ICountryService _countryService;
 
-        public UserService(AUserRepository repository, SignInManager<User> signInManager, IConfiguration configuration, ICountryService countryService)
+        public UserService(AUserRepository repository, SignInManager<User> signInManager,
+            IConfiguration configuration, ICountryService countryService)
         {
             _repository = repository;
             _signInManager = signInManager;
@@ -136,6 +138,7 @@ namespace backend.BLL.Services
 
             };
             await this._countryService.InsertElement(country);
+
         }
 
         public override string GenerateJwtToken(User user)

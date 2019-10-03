@@ -1,0 +1,24 @@
+class Country {
+    public id: string;
+    public userId: string;
+    public countryName: string;
+    public developingName: string;
+    public buildingName: string;
+    public inhabitant: number;
+    public pearl: number;
+    public coral: number;
+    public flowController: number;
+    public reefCastle: number;
+    public assaultSeaDog: number;
+    public battleSeahorse: number;
+    public laserShark: number;
+    public points: number;
+    public devRounds: number;
+    public buildRounds: number;
+    public mudTractor: boolean;
+    public sludgeharvester: boolean;
+    public coralWall: boolean;
+    public sonarGun: boolean;
+    public underwaterMaterialArts: boolean;
+    public alchemy: boolean;
+}

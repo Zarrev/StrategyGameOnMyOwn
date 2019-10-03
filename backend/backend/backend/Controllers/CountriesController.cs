@@ -71,13 +71,13 @@ namespace backend.API.Controllers
         }
 
         [HttpGet("mycountry/inhabitant")]
-        public async Task<ActionResult<int>> GetInhabitant()
+        public async Task<ActionResult> GetInhabitant()
         {
             return Ok(new { inhabitant = await _countryMap.GetInhabitant(HttpContext.User.Identity.Name) });
         }
 
         [HttpGet("mycountry/pearl")]
-        public async Task<ActionResult<int>> GetPearlNumber()
+        public async Task<ActionResult> GetPearlNumber()
         {
             return Ok(new { pearl = await _countryMap.GetPearlNumber(HttpContext.User.Identity.Name) });
         }
@@ -106,11 +106,16 @@ namespace backend.API.Controllers
         }
 
         [HttpGet("mycountry/points")]
-        public async Task<ActionResult<int>> GetAssaultSeaDogNumber()
+        public async Task<ActionResult> GetPoints()
         {
             return Ok(new { points = await _countryMap.GetPoints(HttpContext.User.Identity.Name) });
         }
 
+        [HttpGet("mycountry/rank")]
+        public async Task<ActionResult> GetRank()
+        {
+            return Ok(new { rank = await _countryMap.GetRank(HttpContext.User.Identity.Name) });
+        }
         [HttpGet("mycountry/developments")]
         public async Task<ActionResult> GetDevelopments()
         {
@@ -158,6 +163,12 @@ namespace backend.API.Controllers
             });
         }
 
+        [HttpGet("round")]
+        public async Task<ActionResult<int>> GetActualRound()
+        {
+            return _roundService.ServerRoundNumber;
+        }
+
         // PUT
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCountry([FromRoute] string id, [FromBody] CountryView country)
@@ -183,7 +194,7 @@ namespace backend.API.Controllers
 
 
         [HttpPost("mycountry/build")]
-        public async Task<ActionResult> PostBuildAction(int buildingType)
+        public async Task<ActionResult> PostBuildAction([FromBody] int buildingType)
         {
             await _countryMap.Build(HttpContext.User.Identity.Name, buildingType);
 
@@ -191,7 +202,7 @@ namespace backend.API.Controllers
         }
 
         [HttpPost("mycountry/develop")]
-        public async Task<ActionResult> PostDevelopAction(int developType)
+        public async Task<ActionResult> PostDevelopAction([FromBody] int developType)
         {
             await _countryMap.Develop(HttpContext.User.Identity.Name, developType);
 

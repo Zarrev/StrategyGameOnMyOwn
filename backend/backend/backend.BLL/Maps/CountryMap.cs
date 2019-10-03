@@ -16,6 +16,11 @@ namespace backend.BLL.Maps
             _service = service;
         }
 
+        public async Task<int> GetRank(string userId)
+        {
+            return await this._service.GetRank(userId);
+        }
+
         public async Task<CountryView> GetElement(string elementViewModelId)
         {
             return await _service.GetElementById(elementViewModelId).ContinueWith(task => CountryMap.DomainToViewModel(task.Result));
@@ -91,6 +96,7 @@ namespace backend.BLL.Maps
                 UserId = model.UserId,
                 CountryName = model.CountryName,
                 DevelopingName = model.DevelopingName,
+                Coral = model.Coral,
                 BuildingName = model.BuildingName,
                 Alchemy = model.Alchemy,
                 AssaultSeaDog = model.AssaultSeaDog,
@@ -129,6 +135,7 @@ namespace backend.BLL.Maps
                 LaserShark = model.LaserShark,
                 MudTractor = model.MudTractor,
                 Pearl = model.Pearl,
+                Coral = model.Coral,
                 Points = model.Points,
                 ReefCastle = model.ReefCastle,
                 DevRounds = model.DevRounds,

@@ -14,6 +14,7 @@ namespace backend.Model.Frontend
         public int BuildingName { get; set; }
         public int Inhabitant { get; set; }
         public int Pearl { get; set; }
+        public int Coral { get; set; }
         public int FlowController { get; set; }
         public int ReefCastle { get; set; }
         public int AssaultSeaDog { get; set; }

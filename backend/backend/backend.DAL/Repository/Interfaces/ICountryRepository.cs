@@ -9,5 +9,6 @@ namespace backend.DAL.Repository.Interfaces
     public interface ICountryRepository: IBaseRepository<Country, string>
     {
         Task<Country> getElementByUserId(string userId);
+        Task<int> getCurrentRank(string userId);
     }
 }
