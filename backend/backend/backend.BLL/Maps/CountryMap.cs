@@ -215,7 +215,7 @@ namespace backend.BLL.Maps
 
         public async Task Develop(string userId, int developType)
         {
-            await _service.Build(userId, developType);
+            await _service.Develop(userId, developType);
         }
         
         public async Task HireMercenary(string userId, MercenaryRequest mercenaryList)

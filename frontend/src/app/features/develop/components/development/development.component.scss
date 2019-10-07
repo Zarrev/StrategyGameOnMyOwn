@@ -1,0 +1,32 @@
+.white-text {
+    color: #FFFFFF;
+}
+
+.separetor {
+    border-color: #3B7DBD;
+    border-top-width: medium;
+}
+
+.description-row {
+    display: block;
+    margin: auto auto auto 15px;
+}
+
+.building {
+    background-color: #03255F;
+    display: flex;
+    text-align: center;
+}
+
+.selected {
+    border: 2px solid #3B7DBD;
+}
+
+img {
+    margin-top: 1rem;
+}
+
+.ok {
+    vertical-align: text-top;
+    margin-left: 1rem;
+}

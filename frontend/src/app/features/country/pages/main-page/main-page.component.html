@@ -1,7 +1,14 @@
 <div class="col h-100">
     <app-header></app-header>
-    <app-menu></app-menu>
-    <app-user-part></app-user-part>
+    <div class="row">
+        <div class="col" style="flex-grow: 0;">
+            <app-menu></app-menu>
+            <app-user-part></app-user-part>
+        </div>
+        <div class="col content-col">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
 </div>
 <!-- <div style="position: bottom">Some icons made by <a href="https://www.flaticon.com/authors/payungkead" title="Payungkead">Payungkead</a> from <a
     href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> -->

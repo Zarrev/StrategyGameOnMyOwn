@@ -1,4 +1,5 @@
 @import "~bootstrap/scss/bootstrap";
+@import "../../pages/main-page/main-page.component.scss";
 
 .row-w-m {
     @extend .row;
@@ -7,5 +8,9 @@
 }
 
 button {
-    margin: 1.5rem;
+    margin: 0.2rem;
+}
+
+button:enabled > strong {
+    color: #001234;
 }

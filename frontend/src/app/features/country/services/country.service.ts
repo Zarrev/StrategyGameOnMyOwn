@@ -16,6 +16,7 @@ export class CountryService extends BaseService {
   private specAPI = 'countries/mycountry';
   private _round = new BehaviorSubject<number>(0);
   private _rank = new BehaviorSubject<number>(0);
+  private _country = new BehaviorSubject<Country>(null);
 
   constructor(private http: HttpClient, toastService: ToastService, helper: Helpers) {
     super(helper, toastService);
@@ -31,9 +32,14 @@ export class CountryService extends BaseService {
     return this._rank.asObservable();
   }
 
+  get country(): Observable<Country> {
+    return this._country.asObservable();
+  }
+
   getUserCountry(): Observable<Country> {
     return this.http.get<Country>(environment.apiUrl + this.specAPI, super.header()).pipe(
       map(country => {
+        this._country.next(country);
         return country;
       }),
       catchError(error => super.handleError(error))
@@ -78,10 +84,10 @@ export class CountryService extends BaseService {
     );
   }
 
-  getDevelopments(): Observable<{ MudTractor: boolean, Sludgeharvester: boolean, CoralWall: boolean,
-     SonarGun: boolean, UnderwaterMaterialArts: boolean, Alchemy: boolean }> {
-    return this.http.get<{ MudTractor: boolean, Sludgeharvester: boolean, CoralWall: boolean,
-      SonarGun: boolean, UnderwaterMaterialArts: boolean, Alchemy: boolean }>
+  getDevelopments(): Observable<{ mudTractor: boolean, sludgeharvester: boolean, coralWall: boolean,
+    sonarGun: boolean, underwaterMaterialArts: boolean, alchemy: boolean }> {
+    return this.http.get<{ mudTractor: boolean, sludgeharvester: boolean, coralWall: boolean,
+      sonarGun: boolean, underwaterMaterialArts: boolean, alchemy: boolean }>
     (environment.apiUrl + this.specAPI + '/developments', super.header()).pipe(
       map(response => {
         return response;
@@ -119,9 +125,11 @@ export class CountryService extends BaseService {
     );
   }
 
-  getNext(): Observable<{ country: number, round: number }> {
-    return this.http.get<{ country: number, round: number }>(environment.apiUrl + 'countries/next', super.header()).pipe(
+  next(): Observable<{ country: Country, round: number }> {
+    return this.http.get<{ country: Country, round: number }>(environment.apiUrl + 'countries/next', super.header()).pipe(
       map(response => {
+        this._country.next(response.country);
+        this._round.next(response.round);
         return response;
       }),
       catchError(error => super.handleError(error))

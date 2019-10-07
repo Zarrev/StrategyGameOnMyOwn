@@ -1,0 +1,74 @@
+<div class="col w-100 align-middle" style="background-color: #03255F">
+    <div class=" description-row">
+        <h1 class="h3 font-weight-bolder white-text">Developments</h1>
+        <p class="lead font-weight-bolder white-text">Select that one what you would you like to develop</p>
+        <p class="white-text">You can develop one at a time, it takes 15 round and you can own one from each. You can
+            select with mouse click.</p>
+    </div>
+    <div class="row d-flex justify-content-center">
+        <div class="jumbotron building" style="padding: 0;">
+            <div class="col" (click)="setSelected(0)" [ngClass]="{'selected': selected == 0 && !developments.mudTractor}">
+                <!-- MudTractor -->
+                <img src="../../../../../assets/images/developments/undersea_game-09.png" width="92px" height="92px"
+                    alt="MudTractor" />
+                <h1 class="h4 font-weight-bolder white-text">MudTractor<div *ngIf="!developments.mudTractor else owner"></div></h1>
+                <p class="white-text">Increase the Coral production by 10%</p>
+            </div>
+        </div>
+        <div class="jumbotron building" style="padding: 0;">
+            <div class="col" (click)="setSelected(1)" [ngClass]="{'selected': selected == 1 && !developments.sludgeharvester}">
+                <!-- Sludgeharvester -->
+                <img src="../../../../../assets/images/developments/undersea_game-10.png" width="112px" height="92px"
+                    alt="Sludgeharvester" />
+                <h1 class="h4 font-weight-bolder white-text">Sludgeharvester<div *ngIf="!developments.sludgeharvester else owner"></div></h1>
+                <p class="white-text">Increase the Coral production by 15%</p>
+            </div>
+        </div>
+        <div class="jumbotron building" style="padding: 0;">
+            <div class="col" (click)="setSelected(2)" [ngClass]="{'selected': selected == 2 && !developments.coralWall}">
+                <!-- CoralWall -->
+                <img src="../../../../../assets/images/developments/coralwall.svg" width="92px" height="92px"
+                    alt="CoralWall" />
+                <h1 class="h4 font-weight-bolder white-text">Coral Wall<div *ngIf="!developments.coralWall else owner"></div></h1>
+                <p class="white-text">Increase the Defens point by 20%</p>
+            </div>
+        </div>
+        <div class="jumbotron building" style="padding: 0;">
+            <div class="col" (click)="setSelected(3)" [ngClass]="{'selected': selected == 3 && !developments.sonarGun}">
+                <!-- SonarGun -->
+                <img src="../../../../../assets/images/developments/undersea_game-03.png" width="92px" height="112px"
+                    alt="SonarGun" />
+                <h1 class="h4 font-weight-bolder white-text">Sonar Gun<div *ngIf="!developments.sonarGun else owner"></div></h1>
+                <p class="white-text">Increase the Attack point by 20%</p>
+            </div>
+        </div>
+        <div class="jumbotron building" style="padding: 0;">
+            <div class="col" (click)="setSelected(4)" [ngClass]="{'selected': selected == 4 && !developments.underwaterMaterialArts}">
+                <!-- UnderwaterMaterialArts -->
+                <img src="../../../../../assets/images/developments/underwaterfight.svg" width="92px" height="92px"
+                    alt="UnderwaterMaterialArts" />
+                <h1 class="h4 font-weight-bolder white-text">Underwater Material Arts<div *ngIf="!developments.underwaterMaterialArts else owner"></div></h1>
+                <p class="white-text">Increase the Attack & Defens point by 10%</p>
+            </div>
+        </div>
+        <div class="jumbotron building" style="padding: 0;">
+            <div class="col" (click)="setSelected(5)" [ngClass]="{'selected': selected == 5 && !developments.alchemy}">
+                <!-- Alchemy -->
+                <img src="../../../../../assets/images/developments/potion.svg" width="92px" height="92px"
+                    alt="Alchemy" />
+                <h1 class="h4 font-weight-bolder white-text">Alchemy<div *ngIf="!developments.alchemy else owner"></div></h1>
+                <p class="white-text">Increase the collected tax by 30%</p>
+            </div>
+        </div>
+    </div>
+    <div class="row description-row" style="padding: 2rem; text-align: center;">
+        <hr class="my-4 separetor">
+        <button class="btn btn-primary btn-lg" style="margin-right: 1rem;" href="#" role="button"
+            [disabled]="selected < 0" (click)="buy()">Buy it</button>
+        <button class="btn btn-primary btn-lg" href="#" role="button" (click)="cancel()">Cancel</button>
+    </div>
+</div>
+
+<ng-template #owner>
+        <img class="ok" src="../../../../../assets/images/icons/checked.svg" width="42px" height="42px" alt="Owner" />
+</ng-template>

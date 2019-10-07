@@ -7,6 +7,7 @@ import { HeaderComponent } from './components/header/header.component';
 import {NgbModule, NgbTooltipModule} from '@ng-bootstrap/ng-bootstrap';
 import { UserPartComponent } from './components/user-part/user-part.component';
 import { MenuComponent } from './components/menu/menu.component';
+import { BuildingsModule } from '../buildings/buildings.module';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { MenuComponent } from './components/menu/menu.component';
     SharedModule,
     CountryRoutingModule,
     NgbModule,
-    NgbTooltipModule
+    NgbTooltipModule,
+    BuildingsModule
   ]
 })
 export class CountryModule { }

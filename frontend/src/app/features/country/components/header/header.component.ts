@@ -12,16 +12,17 @@ import { CountryService } from '../../services/country.service';
 export class HeaderComponent implements OnInit, OnDestroy {
 
   user: User;
-  country: Country;
-  globalRound: number;
+  _country: Country;
   private subscription: Subscription[] = [];
 
   constructor(private authenticationService: AuthenticationService, private countryService: CountryService) {
     this.subscription.push(this.authenticationService.currentUser.subscribe(user => {
       this.user = user;
-      this.subscription.push(this.countryService.getUserCountry().subscribe(country => this.country = country));
+      this.subscription.push(this.countryService.getUserCountry().subscribe(country => console.log('Country has got!')));
+      this.subscription.push(this.countryService.country.subscribe(country => this._country = country));
     }));
-    this.countryService.getCurrentRound();
+    this.subscription.push(this.countryService.getCurrentRound().subscribe(round => console.log('Round has stepped!')));
+    this.subscription.push(this.countryService.getRank().subscribe(rank => console.log('Your rank is ' + rank)));
   }
 
   ngOnInit() {
@@ -33,6 +34,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   get rank(): Observable<number> {
     return this.countryService.rank;
+  }
+
+  get country(): Country {
+    return this._country;
   }
 
   ngOnDestroy(): void {

@@ -1,73 +1,76 @@
-<div class="alert alert-primary row-w-m" style="margin-top: 1%;" role="alert">
-    <div class="col" placement="bottom" ngbTooltip="Number of rounds in the World so far">
-        <p class="h3 text-center">{{round | async}}th round</p>
-    </div>
-    <div class="col" placement="bottom" ngbTooltip="Your rank in the World">
-        <p class="h3 text-center">{{rank | async}}th rank</p>
-    </div>
-    <div class="col">
-        <div class="row" placement="bottom" ngbTooltip="It shows how much Laser Sharks are in your army">
-            <div class="col text-center" style="padding-right: 0%"><img src="../../../../../assets/images/icons/007-shark.svg"
-                    alt="Laser Shark icon"></div>
-            <div class="col" style="padding-left: 0%">
-                <p class="h3 text-left">{{country?.laserShark}}</p>
+<!-- <div *ngIf="mycountry | async as country"> -->
+    <div class="alert alert-primary row-w-m" style="margin-top: 1%;" role="alert">
+        <div class="col" placement="bottom" ngbTooltip="Number of rounds in the World so far">
+            <p class="h3 text-center">{{round | async}}th round</p>
+        </div>
+        <div class="col" placement="bottom" ngbTooltip="Your rank in the World">
+            <p class="h3 text-center">{{rank | async}}th rank</p>
+        </div>
+
+        <div class="col">
+            <div class="row" placement="bottom" ngbTooltip="It shows how much Laser Sharks are in your army">
+                <div class="col text-center" style="padding-right: 0%"><img
+                        src="../../../../../assets/images/icons/007-shark.svg" alt="Laser Shark icon"></div>
+                <div class="col text-center" style="padding-left: 0%">
+                    <p class="h3">{{country?.laserShark}}</p>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col">
-        <div class="row" placement="bottom" ngbTooltip="It shows how much Assault Seadogs are in your army">
-            <div class="col text-center" style="padding-right: 0%;"><img
-                    src="../../../../../assets/images/icons/025-seal.svg" alt="Assault Seadog icon"></div>
-            <div class="col text-left" style="padding-left: 0%">
-                <p class="h3">{{country?.assaultSeaDog}}</p>
+        <div class="col">
+            <div class="row" placement="bottom" ngbTooltip="It shows how much Assault Seadogs are in your army">
+                <div class="col text-center"><img src="../../../../../assets/images/icons/025-seal.svg"
+                        alt="Assault Seadog icon"></div>
+                <div class="col text-center" style="padding-left: 0%">
+                    <p class="h3">{{country?.assaultSeaDog}}</p>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col">
-        <div class="row" placement="bottom" ngbTooltip="It shows how much Battle Seahorses are in your army">
-            <div class="col text-center" style="padding-right: 0%;"><img
-                    src="../../../../../assets/images/icons/013-seahorse.svg" alt="Battle Seahorse icon"></div>
-            <div class="col text-left" style="padding-left: 0%">
-                <p class="h3">{{country?.battleSeahorse}}</p>
+        <div class="col">
+            <div class="row" placement="bottom" ngbTooltip="It shows how much Battle Seahorses are in your army">
+                <div class="col text-center"><img src="../../../../../assets/images/icons/013-seahorse.svg"
+                        alt="Battle Seahorse icon"></div>
+                <div class="col text-center" style="padding-left: 0%">
+                    <p class="h3">{{country?.battleSeahorse}}</p>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col">
-        <div class="row" placement="bottom" ngbTooltip="It shows how much Pearl you have">
-            <div class="col text-center" style="padding-right: 0%;"><img
-                    src="../../../../../assets/images/icons/shell.svg" alt="Shell icon"></div>
-            <div class="col text-left" style="padding-left: 0%">
-                <p class="h3">{{country?.pearl}}</p>
+        <div class="col">
+            <div class="row" placement="bottom" ngbTooltip="It shows how much Pearl you have">
+                <div class="col text-center"><img src="../../../../../assets/images/icons/shell.svg" alt="Shell icon">
+                </div>
+                <div class="col text-center" style="padding-left: 0%">
+                    <p class="h3">{{country?.pearl}}</p>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col">
-        <div class="row" placement="bottom" ngbTooltip="It shows how much Coral you havey">
-            <div class="col text-center" style="padding-right: 0%;"><img
-                    src="../../../../../assets/images/icons/018-coral.svg" alt="Coral icon"></div>
-            <div class="col text-left" style="padding-left: 0%">
-                <p class="h3">{{country?.coral}}</p>
+        <div class="col">
+            <div class="row" placement="bottom" ngbTooltip="It shows how much Coral you havey">
+                <div class="col text-center"><img src="../../../../../assets/images/icons/018-coral.svg"
+                        alt="Coral icon"></div>
+                <div class="col text-center" style="padding-left: 0%">
+                    <p class="h3">{{country?.coral}}</p>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col">
-        <div class="row" placement="bottom" ngbTooltip="It shows how much Reef Castles are in your country">
-            <div class="col text-center" style="padding-right: 0%;"><img
-                    src="../../../../../assets/images/icons/sand-castle.svg" alt="Reef Castle icon"></div>
-            <div class="col text-left" style="padding-left: 0%">
-                <p class="h3">{{country?.reefCastle}}</p>
+        <div class="col">
+            <div class="row" placement="bottom" ngbTooltip="It shows how much Reef Castles are in your country">
+                <div class="col text-center"><img src="../../../../../assets/images/icons/sand-castle.svg"
+                        alt="Reef Castle icon"></div>
+                <div class="col text-center" style="padding-left: 0%">
+                    <p class="h3">{{country?.reefCastle}}</p>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col">
-        <div class="row" placement="bottom" ngbTooltip="It shows how much Flow Controller are in your country">
-            <div class="col text-center" style="padding-right: 0%;"><img
-                    src="../../../../../assets/images/icons/home.svg" alt="Flow Controller icon"></div>
-            <div class="col text-left" style="padding-left: 0%">
-                <p class="h3">{{country?.flowController}}</p>
+        <div class="col">
+            <div class="row" placement="bottom" ngbTooltip="It shows how much Flow Controller are in your country">
+                <div class="col text-center"><img src="../../../../../assets/images/icons/home.svg"
+                        alt="Flow Controller icon"></div>
+                <div class="col text-center" style="padding-left: 0%">
+                    <p class="h3">{{country?.flowController}}</p>
+                </div>
             </div>
         </div>
     </div>
     <!-- <div>Icons made by <a href="https://www.flaticon.com/authors/payungkead" title="Payungkead">Payungkead</a> from <a
             href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> -->
-</div>
+<!-- </div> -->

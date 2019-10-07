@@ -85,13 +85,28 @@ namespace backend.DAL.Repository
 
         public async Task<int> getCurrentRank(string userId)
         {
-            var index = 1;
-            var query = from country in _context.Countries
+            //var index = 0;
+            //var query = from country in _context.Countries
+            //            orderby country.Points descending
+            //            select country;
+            //var query2 = query.Select((x, i) => new { Country = x, Rank = i+1 });
+            //var query3 = from countryWithRank in query2
+            //             where countryWithRank.Country.UserId == userId
+            //             select countryWithRank.Rank;
+
+            var countries = _context.Countries;
+            var query = from country in countries
                         orderby country.Points descending
-                        select new { Country = country, Rank = index+1 };
-            var query2 = from countryWithRank in query
-                         where countryWithRank.Country.UserId == userId
-                         select countryWithRank.Rank;
+                        select new
+                        {
+                            UserId = country.UserId,
+                            Rank = (from otherCountry in countries
+                                    where otherCountry.Points > country.Points
+                                    select otherCountry).Count() + 1
+                        };
+            var query2 = from uIdWithRank in query
+                         where uIdWithRank.UserId == userId
+                         select uIdWithRank.Rank;
 
             return await query2.FirstOrDefaultAsync();
         }

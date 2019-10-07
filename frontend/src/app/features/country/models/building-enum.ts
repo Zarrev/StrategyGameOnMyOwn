@@ -1,4 +1,5 @@
 export enum BuildingEnum {
+    None = -1,
     FlowController = 0,
     ReefCastle
 }

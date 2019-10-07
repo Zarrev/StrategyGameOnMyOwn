@@ -262,6 +262,7 @@ namespace backend.BLL
                         case 4: country.UnderwaterMaterialArts = true; break;
                         case 5: country.Alchemy = true; break;
                     }
+                    country.DevelopingName = -1;
                     country.DevRounds = 0;
                 } else
                 {
@@ -276,13 +277,14 @@ namespace backend.BLL
         {
             if (Enum.GetName(typeof(BuildingEnum), country.BuildingName) != null)
             {
-                if(country.BuildRounds == 15)
+                if(country.BuildRounds == 5)
                 {
                     switch (country.BuildingName)
                     {
                         case 0: country.FlowController += 1; break;
                         case 1: country.ReefCastle += 1; break;
                     }
+                    country.BuildingName = -1;
                     country.BuildRounds = 0;
                 } else
                 {

@@ -1,17 +1,17 @@
-<div class="row-w-m back" style="margin-bottom: 2rem; width: 15rem;">
+<div class="row-w-m back" style="width: 15rem;">
     <div class="col">
         <div class="row-w-m">
-            <button type="button" class="btn btn-primary btn-lg btn-block mx-auto" disabled>
+            <button type="button" class="btn btn-primary btn-lg btn-block mx-auto" routerLink="build">
                 <strong>Buildings</strong>
             </button>
         </div>
         <div class="row-w-m">
-            <button type="button" class="btn btn-primary btn-lg btn-block mx-auto" disabled>
+            <button type="button" class="btn btn-primary btn-lg btn-block mx-auto" disabled >
                 <strong>Attack</strong>
             </button>
         </div>
         <div class="row-w-m">
-            <button type="button" class="btn btn-primary btn-lg btn-block mx-auto" disabled>
+            <button type="button" class="btn btn-primary btn-lg btn-block mx-auto" routerLink="develop">
                 <strong>Developments</strong>
             </button>
         </div>
@@ -28,6 +28,11 @@
         <div class="row-w-m">
                 <button type="button" class="btn btn-primary btn-lg btn-block mx-auto" disabled>
                     <strong>Army</strong>
+            </button>
+        </div>
+        <div class="row-w-m" style="margin-bottom: 1rem">
+                <button type="button" class="btn btn-primary btn-lg btn-block mx-auto" (click)="next()">
+                    <strong>Next Round</strong>
             </button>
         </div>
     </div>

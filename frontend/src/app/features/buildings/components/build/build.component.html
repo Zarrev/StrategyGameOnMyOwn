@@ -1,0 +1,36 @@
+<div class="col w-100 align-middle" style="background-color: #03255F">
+    <div class=" description-row">
+        <h1 class="h3 font-weight-bolder white-text">Buildings</h1>
+        <p class="lead font-weight-bolder white-text">Select that one what you would you like to build</p>
+        <p class="white-text">You can build one at a time and it takes 5 round. You can select with mouse click.</p>
+    </div>
+    <div class="row d-flex justify-content-between">
+        <div class="jumbotron building" style="margin-left: 10rem;">
+            <div class="col" (click)="setSelected(1)" [ngClass]="{'selected': selected == 1}">
+                <!-- reefcastle -->
+                <img src="../../../../../assets/images/buildings/undersea_game-07.png" alt="Reefcastle" />
+                <h1 class="h4 font-weight-bolder white-text">Reefcastle</h1>
+                <p class="white-text">Add +50 inhabitant.</p>
+                <p class="white-text">It makes +200 Coral/round</p>
+                <p class="font-weight-light white-text">{{reefcastleNumber}} piece</p>
+                <p class="font-weight-light white-text">45 Peral/piece</p>
+            </div>
+        </div>
+        <div class="jumbotron building" style="margin-right: 10rem;">
+            <div class="col" (click)="setSelected(0)" [ngClass]="{'selected': selected == 0}">
+                <!-- flowcontroller -->
+                <img src="../../../../../assets/images/buildings/undersea_game-05.png" alt="Flowcontroller" />
+                <h1 class="h4 font-weight-bolder white-text">Flowcontroller</h1>
+                <p class="white-text">It gives +200 mercenary's places</p>
+                <p class="font-weight-light white-text">{{flowcontrollerNumber}} piece</p>
+                <p class="font-weight-light white-text">35 Peral/piece</p>
+            </div>
+        </div>
+    </div>
+    <div class="row description-row" style="padding: 2rem; text-align: center;">
+        <hr class="my-4 separetor">
+        <button class="btn btn-primary btn-lg" style="margin-right: 1rem;" href="#" role="button"
+            [disabled]="selected < 0" (click)="buy()">Buy it</button>
+        <button class="btn btn-primary btn-lg" href="#" role="button" (click)="cancel()">Cancel</button>
+    </div>
+</div>
