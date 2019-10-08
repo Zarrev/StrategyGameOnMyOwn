@@ -16,6 +16,11 @@ namespace backend.BLL.Services.Interfaces
         Task<Country> FinishRound(string userId);
         Task Build(string userId, int buildingType);
         Task Develop(string userId, int developType);
-        Task HireMercenary(string userId, MercenaryRequest mercanryList);
+        Task<string> HireMercenary(string userId, int LaserShark, int AssaultSeaDog, int BattleSeahorse);
+
+        Task<int> GetDevRound(string userId);
+        Task<int> GetBuildRound(string userId);
+        Task<int> GetBuildingName(string userId);
+        Task<int> GetDevelopingName(string userId);
     }
 }

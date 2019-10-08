@@ -9,7 +9,9 @@
             <div class="col" (click)="setSelected(1)" [ngClass]="{'selected': selected == 1}">
                 <!-- reefcastle -->
                 <img src="../../../../../assets/images/buildings/undersea_game-07.png" alt="Reefcastle" />
-                <h1 class="h4 font-weight-bolder white-text">Reefcastle</h1>
+                <h1 class="h4 font-weight-bolder white-text">Reefcastle
+                    <ng-container *ngIf="name == 1 then remain"></ng-container>
+                </h1>
                 <p class="white-text">Add +50 inhabitant.</p>
                 <p class="white-text">It makes +200 Coral/round</p>
                 <p class="font-weight-light white-text">{{reefcastleNumber}} piece</p>
@@ -20,7 +22,9 @@
             <div class="col" (click)="setSelected(0)" [ngClass]="{'selected': selected == 0}">
                 <!-- flowcontroller -->
                 <img src="../../../../../assets/images/buildings/undersea_game-05.png" alt="Flowcontroller" />
-                <h1 class="h4 font-weight-bolder white-text">Flowcontroller</h1>
+                <h1 class="h4 font-weight-bolder white-text">Flowcontroller
+                    <ng-container *ngIf="name == 0 then remain"></ng-container>
+                </h1>
                 <p class="white-text">It gives +200 mercenary's places</p>
                 <p class="font-weight-light white-text">{{flowcontrollerNumber}} piece</p>
                 <p class="font-weight-light white-text">35 Peral/piece</p>
@@ -34,3 +38,7 @@
         <button class="btn btn-primary btn-lg" href="#" role="button" (click)="cancel()">Cancel</button>
     </div>
 </div>
+
+<ng-template #remain>
+    <p class="font-weight-light white-text">In progress: 5/{{remaining}} rounds</p>
+</ng-template>

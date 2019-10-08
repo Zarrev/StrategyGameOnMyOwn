@@ -21,7 +21,11 @@ namespace backend.BLL.Maps.Interfaces
         Task<List<bool>> GetDevelopments(string userId);
         Task Develop(string userId, int developType);
         Task Build(string userId, int buildingType);
-        Task HireMercenary(string userid, MercenaryRequest mercenaryList);
+        Task<string> HireMercenary(string userid, MercenaryRequest mercenaryList);
         Task<int> GetRank(string userId);
+        Task<int> GetDevRound(string userId);
+        Task<int> GetBuildRound(string userId);
+        Task<int> GetBuildingName(string userId);
+        Task<int> GetDevelopingName(string userId);
     }
 }

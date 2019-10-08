@@ -218,9 +218,29 @@ namespace backend.BLL.Maps
             await _service.Develop(userId, developType);
         }
         
-        public async Task HireMercenary(string userId, MercenaryRequest mercenaryList)
+        public async Task<string> HireMercenary(string userId, MercenaryRequest mercenaryList)
         {
-            await _service.HireMercenary(userId, mercenaryList);
+            return await _service.HireMercenary(userId, mercenaryList.LaserShark, mercenaryList.AssaultSeaDog, mercenaryList.BattleSeahorse);
+        }
+
+        public async Task<int> GetDevRound(string userId)
+        {
+            return await _service.GetDevRound(userId);
+        }
+
+        public async Task<int> GetBuildRound(string userId)
+        {
+            return await _service.GetBuildRound(userId);
+        }
+
+        public async Task<int> GetBuildingName(string userId)
+        {
+            return await _service.GetBuildingName(userId);
+        }
+
+        public async Task<int> GetDevelopingName(string userId)
+        {
+            return await _service.GetDevelopingName(userId);
         }
     }
 }

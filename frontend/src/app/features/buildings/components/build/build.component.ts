@@ -15,6 +15,8 @@ export class BuildComponent implements OnInit, OnDestroy {
   private _reefcastleNumber: number;
   private _flowcontrollerNumber: number;
   private subsc: Subscription[] = [];
+  name = -1;
+  remaining = 0;
   selected: BuildingEnum = -1;
 
   constructor(private countryService: CountryService, private router: Router) {
@@ -33,15 +35,15 @@ export class BuildComponent implements OnInit, OnDestroy {
       this._flowcontrollerNumber = buildings.flowControllNumber;
       this._reefcastleNumber = buildings.reefCastleNumber;
     }));
+    this.subsc.push(this.countryService.getBuildRound().subscribe(value => this.remaining = value));
+    this.subsc.push(this.countryService.getBuildingName().subscribe(value => this.name = value));
   }
 
   get reefcastleNumber(): number {
-    // this.init();
     return this._reefcastleNumber;
   }
 
   get flowcontrollerNumber(): number {
-    // this.init();
     return this._flowcontrollerNumber;
   }
 

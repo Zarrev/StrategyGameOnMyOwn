@@ -56,6 +56,42 @@ export class CountryService extends BaseService {
     );
   }
 
+  getDevRound(): Observable<number> {
+    return this.http.get<number>(environment.apiUrl + this.specAPI + '/devround', super.header()).pipe(
+      map(round => {
+        return round;
+      }),
+      catchError(error => super.handleError(error))
+    );
+  }
+
+  getBuildRound(): Observable<number> {
+    return this.http.get<number>(environment.apiUrl + this.specAPI + '/buildround', super.header()).pipe(
+      map(round => {
+        return round;
+      }),
+      catchError(error => super.handleError(error))
+    );
+  }
+
+  getBuildingName(): Observable<number> {
+    return this.http.get<{buildingname: number}>(environment.apiUrl + this.specAPI + '/buildingname', super.header()).pipe(
+      map(resp => {
+        return resp.buildingname;
+      }),
+      catchError(error => super.handleError(error))
+    );
+  }
+
+  getDevelopingName(): Observable<number> {
+    return this.http.get<{developingname: number}>(environment.apiUrl + this.specAPI + '/developingname', super.header()).pipe(
+      map(resp => {
+        return resp.developingname;
+      }),
+      catchError(error => super.handleError(error))
+    );
+  }
+  
   getInhibitant(): Observable<number> {
     return this.http.get<{ inhibitant: number }>(environment.apiUrl + this.specAPI + '/inhabitant', super.header()).pipe(
       map(response => {
@@ -155,7 +191,13 @@ export class CountryService extends BaseService {
   }
 
   postHireAction(mercanryList: MercenaryRequest): Observable<any> {
-    return this.http.post<MercenaryRequest>(environment.apiUrl + this.specAPI + '/hire', mercanryList, super.header()).pipe(
+    return this.http.post<{message: string}>(environment.apiUrl + this.specAPI + '/hire', mercanryList,
+     { headers: super.header().headers, observe: 'response'}).pipe(
+       map(response => {
+         if (!response.ok) {
+            super.handleError(response);
+         }
+       }),
       catchError(error => super.handleError(error))
     );
   }

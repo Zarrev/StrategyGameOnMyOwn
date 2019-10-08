@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { BuildingEnum } from 'src/app/features/country/models/building-enum';
 import { CountryService } from 'src/app/features/country/services/country.service';
 import { Router } from '@angular/router';
@@ -18,6 +18,8 @@ export class DevelopmentComponent implements OnInit, OnDestroy {
   };
   private subsc: Subscription[] = [];
   selected: BuildingEnum = -1;
+  name = -1;
+  remaining = 0;
 
   constructor(private countryService: CountryService, private router: Router) {
     this.init();
@@ -33,8 +35,9 @@ export class DevelopmentComponent implements OnInit, OnDestroy {
   private init(): void {
     this.subsc.push(this.countryService.getDevelopments().subscribe(developments => {
       this._developments = developments;
-      console.log(this.developments);
     }));
+    this.subsc.push(this.countryService.getDevRound().subscribe(value => this.remaining = value));
+    this.subsc.push(this.countryService.getDevelopingName().subscribe(value => this.name = value));
   }
 
   get developments(): {
@@ -44,11 +47,6 @@ export class DevelopmentComponent implements OnInit, OnDestroy {
     return this._developments;
   }
 
-  // missing endpoint
-  // get remainingTime(): number {
-  //   this.countryService.
-  // }
-
   buy(): void {
     this.subsc.push(this.countryService.postDevelopAction(this.selected).subscribe(() => console.log('Bought!')));
     this.cancel();
@@ -56,6 +54,8 @@ export class DevelopmentComponent implements OnInit, OnDestroy {
   }
 
   cancel(): void {
+    console.log(this.name);
+    console.log(this.remaining);
     this.router.navigate(['/']);
   }
 
@@ -64,5 +64,4 @@ export class DevelopmentComponent implements OnInit, OnDestroy {
       this.selected = eventNumber;
     }
   }
-
 }

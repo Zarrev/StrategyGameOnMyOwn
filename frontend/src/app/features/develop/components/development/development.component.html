@@ -11,7 +11,10 @@
                 <!-- MudTractor -->
                 <img src="../../../../../assets/images/developments/undersea_game-09.png" width="92px" height="92px"
                     alt="MudTractor" />
-                <h1 class="h4 font-weight-bolder white-text">MudTractor<div *ngIf="!developments.mudTractor else owner"></div></h1>
+                <h1 class="h4 font-weight-bolder white-text">MudTractor
+                    <ng-container *ngIf="developments.mudTractor then owner"></ng-container>
+                    <ng-container *ngIf="name == 0 then remain"></ng-container>
+                </h1>
                 <p class="white-text">Increase the Coral production by 10%</p>
             </div>
         </div>
@@ -20,7 +23,10 @@
                 <!-- Sludgeharvester -->
                 <img src="../../../../../assets/images/developments/undersea_game-10.png" width="112px" height="92px"
                     alt="Sludgeharvester" />
-                <h1 class="h4 font-weight-bolder white-text">Sludgeharvester<div *ngIf="!developments.sludgeharvester else owner"></div></h1>
+                <h1 class="h4 font-weight-bolder white-text">Sludgeharvester
+                    <ng-container *ngIf="developments.sludgeharvester then owner"></ng-container>
+                    <ng-container *ngIf="name == 1 then remain"></ng-container>
+                </h1>
                 <p class="white-text">Increase the Coral production by 15%</p>
             </div>
         </div>
@@ -29,7 +35,10 @@
                 <!-- CoralWall -->
                 <img src="../../../../../assets/images/developments/coralwall.svg" width="92px" height="92px"
                     alt="CoralWall" />
-                <h1 class="h4 font-weight-bolder white-text">Coral Wall<div *ngIf="!developments.coralWall else owner"></div></h1>
+                <h1 class="h4 font-weight-bolder white-text">Coral Wall
+                    <ng-container *ngIf="developments.coralWall then owner"></ng-container>
+                    <ng-container *ngIf="name == 2 then remain"></ng-container>
+                </h1>
                 <p class="white-text">Increase the Defens point by 20%</p>
             </div>
         </div>
@@ -38,7 +47,10 @@
                 <!-- SonarGun -->
                 <img src="../../../../../assets/images/developments/undersea_game-03.png" width="92px" height="112px"
                     alt="SonarGun" />
-                <h1 class="h4 font-weight-bolder white-text">Sonar Gun<div *ngIf="!developments.sonarGun else owner"></div></h1>
+                <h1 class="h4 font-weight-bolder white-text">Sonar Gun
+                    <ng-container *ngIf="developments.sonarGun then owner"></ng-container>
+                    <ng-container *ngIf="name == 3 then remain"></ng-container>
+                </h1>
                 <p class="white-text">Increase the Attack point by 20%</p>
             </div>
         </div>
@@ -47,7 +59,10 @@
                 <!-- UnderwaterMaterialArts -->
                 <img src="../../../../../assets/images/developments/underwaterfight.svg" width="92px" height="92px"
                     alt="UnderwaterMaterialArts" />
-                <h1 class="h4 font-weight-bolder white-text">Underwater Material Arts<div *ngIf="!developments.underwaterMaterialArts else owner"></div></h1>
+                <h1 class="h4 font-weight-bolder white-text">Underwater Material Arts
+                    <ng-container *ngIf="developments.underwaterMaterialArts then owner"></ng-container>
+                    <ng-container *ngIf="name == 4 then remain"></ng-container>
+                </h1>
                 <p class="white-text">Increase the Attack & Defens point by 10%</p>
             </div>
         </div>
@@ -56,7 +71,10 @@
                 <!-- Alchemy -->
                 <img src="../../../../../assets/images/developments/potion.svg" width="92px" height="92px"
                     alt="Alchemy" />
-                <h1 class="h4 font-weight-bolder white-text">Alchemy<div *ngIf="!developments.alchemy else owner"></div></h1>
+                <h1 class="h4 font-weight-bolder white-text">Alchemy
+                    <ng-container *ngIf="developments.alchemy then owner"></ng-container>
+                    <ng-container *ngIf="name == 5 then remain"></ng-container>
+                </h1>
                 <p class="white-text">Increase the collected tax by 30%</p>
             </div>
         </div>
@@ -71,4 +89,8 @@
 
 <ng-template #owner>
         <img class="ok" src="../../../../../assets/images/icons/checked.svg" width="42px" height="42px" alt="Owner" />
+</ng-template>
+
+<ng-template #remain>
+    <p class="font-weight-light white-text">In progress: 15/{{remaining}} rounds</p>
 </ng-template>

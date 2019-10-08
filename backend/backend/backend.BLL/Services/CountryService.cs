@@ -134,30 +134,74 @@ namespace backend.BLL
         public async Task Build(string userId, int buildingType)
         {
             var country = await GetElementByUserId(userId);
-            if (Enum.GetName(typeof(BuildingEnum), buildingType) != null)
+            if (Enum.GetName(typeof(BuildingEnum), buildingType) != null && country.BuildingName == -1)
             {
                 country.BuildingName = buildingType;
                 await UpdateElement(country);
+            } else
+            {
+                // send a warning message to the user: You are building now, please wait the end of work (__ round remains).
             }
         }
 
         public async Task Develop(string userId, int developType)
         {
             var country = await GetElementByUserId(userId);
-            if (Enum.GetName(typeof(DevelopmentEnum), developType) != null)
+            if (Enum.GetName(typeof(DevelopmentEnum), developType) != null && country.DevelopingName == -1)
             {
                 country.DevelopingName = developType;
                 await UpdateElement(country);
             }
+            else
+            {
+                // send a warning message to the user: You are developing now, please wait the end of work (__ round remains).
+            }
         }
 
-        public async Task HireMercenary(string userId, MercenaryRequest mercanryList)
+        public async Task<int> GetDevRound(string userId)
         {
-            var country = await GetElementByUserId(userId);
-            country.LaserShark = mercanryList.LaserShark;
-            country.AssaultSeaDog = mercanryList.AssaultSeaDog;
-            country.BattleSeahorse = mercanryList.BattleSeahorse;
-            await UpdateElement(country);
+            return await GetElementByUserId(userId).ContinueWith(task => task.Result.DevRounds);
+        }
+
+        public async Task<int> GetBuildRound(string userId)
+        {
+            return await GetElementByUserId(userId).ContinueWith(task => task.Result.BuildRounds);
+        }
+
+        public async Task<string> HireMercenary(string userId, int LaserShark, int AssaultSeaDog, int BattleSeahorse)
+        {
+            var country = await this.GetElementByUserId(userId);
+            if (CanHire(country, LaserShark, AssaultSeaDog, BattleSeahorse))
+            {
+                country.LaserShark = LaserShark;
+                country.AssaultSeaDog = AssaultSeaDog;
+                country.BattleSeahorse = BattleSeahorse;
+                await UpdateElement(country);
+                return await Task.FromResult("OK");
+            }
+
+            return await Task.FromResult("You cannot feed that much mercenaries.");
+            
+        }
+
+        public async Task<int> GetBuildingName(string userId)
+        {
+            return await this.GetElementByUserId(userId).ContinueWith(task => task.Result.BuildingName);
+        }
+
+        public async Task<int> GetDevelopingName(string userId)
+        {
+            return await this.GetElementByUserId(userId).ContinueWith(task => task.Result.DevelopingName);
+        }
+
+        private bool CanHire(Country country, int LaserShark, int AssaultSeaDog, int BattleSeahorse)
+        {
+            return ((country.Coral - (CalcMercenaryEatingCost(country) + CalcNewMercenariesEatingCost(LaserShark, AssaultSeaDog, BattleSeahorse)) >= 0));
+        }
+
+        private int CalcNewMercenariesEatingCost(int LaserShark, int AssaultSeaDog, int BattleSeahorse)
+        {
+            return LaserShark * 2 + AssaultSeaDog + BattleSeahorse;
         }
 
         private List<bool> GetDevelopmentsForCountry(Country country)

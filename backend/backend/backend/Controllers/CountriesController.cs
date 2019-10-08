@@ -169,6 +169,32 @@ namespace backend.API.Controllers
             return _roundService.ServerRoundNumber;
         }
 
+        [HttpGet("mycountry/devround")]
+        public async Task<ActionResult<int>> GetDevRound()
+        {
+            var userId = HttpContext.User.Identity.Name;
+            return await _countryMap.GetDevRound(userId);
+        }
+
+        [HttpGet("mycountry/buildround")]
+        public async Task<ActionResult<int>> GetBuildRound()
+        {
+            var userId = HttpContext.User.Identity.Name;
+            return await _countryMap.GetBuildRound(userId);
+        }
+
+        [HttpGet("mycountry/buildingname")]
+        public async Task<ActionResult> GetBuildingName()
+        {
+            return Ok(new { buildingname = await _countryMap.GetBuildingName(HttpContext.User.Identity.Name) });
+        }
+
+        [HttpGet("mycountry/developingname")]
+        public async Task<ActionResult> GetDevelopingName()
+        {
+            return Ok(new { developingname = await _countryMap.GetDevelopingName(HttpContext.User.Identity.Name) });
+        }
+
         // PUT
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCountry([FromRoute] string id, [FromBody] CountryView country)
@@ -212,9 +238,14 @@ namespace backend.API.Controllers
         [HttpPost("mycountry/hire")]
         public async Task<ActionResult> PostHireAction(MercenaryRequest mercanryList)
         {
-            await _countryMap.HireMercenary(HttpContext.User.Identity.Name, mercanryList);
+            var message = await _countryMap.HireMercenary(HttpContext.User.Identity.Name, mercanryList);
 
-            return Ok();
+            if (message.Equals("OK"))
+            {
+                return Ok(new { message });
+            }
+
+            return BadRequest(new { error = message });
         }
 
         // DELETE
