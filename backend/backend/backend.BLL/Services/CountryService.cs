@@ -173,9 +173,9 @@ namespace backend.BLL
             var country = await this.GetElementByUserId(userId);
             if (CanHire(country, LaserShark, AssaultSeaDog, BattleSeahorse))
             {
-                country.LaserShark = LaserShark;
-                country.AssaultSeaDog = AssaultSeaDog;
-                country.BattleSeahorse = BattleSeahorse;
+                country.LaserShark += LaserShark;
+                country.AssaultSeaDog += AssaultSeaDog;
+                country.BattleSeahorse += BattleSeahorse;
                 await UpdateElement(country);
                 return await Task.FromResult("OK");
             }

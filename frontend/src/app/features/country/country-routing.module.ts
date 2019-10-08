@@ -14,6 +14,10 @@ const routes: Routes = [
       {
         path: 'develop',
         loadChildren: './../develop/develop.module#DevelopModule'
+      },
+      {
+        path: 'army',
+        loadChildren: './../army/army.module#ArmyModule'
       }
     ]
   }

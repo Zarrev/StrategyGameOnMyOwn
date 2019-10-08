@@ -1,0 +1,33 @@
+.white-text {
+    color: #FFFFFF;
+}
+
+.separetor {
+    border-color: #3B7DBD;
+    border-top-width: medium;
+}
+
+.description-row {
+    display: block;
+    margin: auto auto auto 15px;
+}
+
+.building {
+    background-color: #03255F;
+    display: flex;
+    text-align: center;
+}
+
+img {
+    display: block;
+    margin: auto;
+}
+
+.div-img {
+    height: 115.48px;
+    width: 115.48px;
+    border-radius: 30px;
+    background: rgba(159, 255, 240, 0.8);
+    margin: auto;
+    display: flex;
+}

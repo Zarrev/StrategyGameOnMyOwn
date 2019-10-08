@@ -1,0 +1,72 @@
+<div class="col w-100 align-middle" style="background-color: #03255F">
+    <div class=" description-row">
+        <h1 class="h3 font-weight-bolder white-text">Army - Mercenaries</h1>
+    </div>
+    <div class="row d-flex justify-content-center">
+        <div class="jumbotron building">
+            <div class="col justify-content-between">
+                <!-- LaserShark -->
+                <div class="div-img">
+                    <img src="../../../../../assets/images/icons/007-shark.svg" alt="LaserShark" />
+                </div>
+                <h1 class="h4 font-weight-bolder white-text">LaserShark</h1>
+                <p class="font-weight-light white-text">You own: {{laserSharkNumber}} piece</p>
+                <p class="font-weight-light white-text">Attack/Defense: 5/5</p>
+                <p class="font-weight-light white-text">Price (/round/piece): 1 pearl</p>
+                <p class="font-weight-light white-text">Supply: 1 Coral</p>
+                <p class="font-weight-light white-text">Price: 200 pearl</p>
+                <div class="btn-group btn-group-sm" role="group" aria-label="LaserShark button group">
+                    <button type="button" class="btn btn-secondary" (click)="change('laserShark', '-')">-</button>
+                    <button type="button" class="btn btn-secondary" diasbled>{{selectedLaserSharkNumber}}</button>
+                    <button type="button" class="btn btn-secondary" (click)="change('laserShark', '+')">+</button>
+                </div>
+            </div>
+        </div>
+        <div class="jumbotron building">
+            <div class="col justify-content-between">
+                <!-- AssaultSeaDog -->
+                <div class="div-img">
+                    <img src="../../../../../assets/images/icons/025-seal.svg" alt="AssaultSeaDog" />
+                </div>
+                <h1 class="h4 font-weight-bolder white-text">AssaultSeaDog</h1>
+                <p class="font-weight-light white-text">You own: {{assaultSeaDogNumber}} piece</p>
+                <p class="font-weight-light white-text">Attack/Defense: 5/5</p>
+                <p class="font-weight-light white-text">Price (/round/piece): 1 pearl</p>
+                <p class="font-weight-light white-text">Supply: 1 Coral</p>
+                <p class="font-weight-light white-text">Price: 200 pearl</p>
+                <div class="btn-group btn-group-sm" role="group" aria-label="AssaultSeaDog button group">
+                    <button type="button" class="btn btn-secondary" (click)="change('assaultSeaDog', '-')">-</button>
+                    <button type="button" class="btn btn-secondary" diasbled>{{selectedAssaultSeaDogNumber}}</button>
+                    <button type="button" class="btn btn-secondary" (click)="change('assaultSeaDog', '+')">+</button>
+                </div>
+            </div>
+        </div>
+        <div class="jumbotron building">
+            <div class="col justify-content-between">
+                <!-- BattleSeahorse -->
+                <div class="div-img">
+                    <img src="../../../../../assets/images/icons/013-seahorse.svg" alt="BattleSeahorse" />
+                </div>
+                <h1 class="h4 font-weight-bolder white-text">BattleSeahorse</h1>
+                <p class="font-weight-light white-text">You own: {{battleSeahorseNumber}} piece</p>
+                <p class="font-weight-light white-text">Attack/Defense: 5/5</p>
+                <p class="font-weight-light white-text">Price (/round/piece): 1 pearl</p>
+                <p class="font-weight-light white-text">Supply: 1 Coral</p>
+                <p class="font-weight-light white-text">Price: 200 pearl</p>
+                <div class="btn-group btn-group-sm" role="group" aria-label="BattleSeahorse button group">
+                    <button type="button" class="btn btn-secondary" (click)="change('battleSeahorse', '-')">-</button>
+                    <button type="button" class="btn btn-secondary" diasbled>{{selectedBattleSeahorseNumber}}</button>
+                    <button type="button" class="btn btn-secondary" (click)="change('battleSeahorse', '+')">+</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row description-row" style="text-align: center;">
+        <hr class="my-4 separetor">
+        <button class="btn btn-primary btn-lg" style="margin-right: 1rem;" href="#" role="button"
+            [disabled]="!((selectedBattleSeahorseNumber + selectedAssaultSeaDogNumber + selectedLaserSharkNumber) > 0)"
+            (click)="buy()">Buy</button>
+        <!-- missing implementatiopn -->
+        <button class="btn btn-primary btn-lg" href="#" role="button" (click)="cancel()">Cancel</button>
+    </div>
+</div>
