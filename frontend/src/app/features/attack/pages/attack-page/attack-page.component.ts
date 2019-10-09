@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/core/models/user';
 
 @Component({
   selector: 'app-attack-page',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AttackPageComponent implements OnInit {
 
+  private selectedUser: User;
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  onSelected(user: User) {
+    this.selectedUser = user;
+    console.log(user);
+  }
 }

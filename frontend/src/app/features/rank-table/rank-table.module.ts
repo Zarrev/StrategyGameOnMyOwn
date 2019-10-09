@@ -13,6 +13,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     ReactiveFormsModule,
     RankTableRoutingModule
+  ],
+  exports: [
+    RankTableComponent
   ]
 })
 export class RankTableModule { }

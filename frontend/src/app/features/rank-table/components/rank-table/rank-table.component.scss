@@ -1,8 +1,3 @@
-.title {
-    color: #FFFFFF;
-    margin-bottom: 2rem;
-}
-
 .searchbox {
     border-radius: 30px;
     color: #1C3E76;
@@ -14,17 +9,12 @@
     border-top-width: medium;
 }
 
-.description-row {
-    display: block;
-    margin: auto auto auto 20px;
-}
-
 .list {
     padding: 0;
     background-color: #03255F;
     color: white;
     font-weight: bold;
-    max-height: 200px;
+    max-height: 25rem;
     overflow-y: scroll;
     width: 90%;
     // scrollbar-color: #3F68AE #03255F;
@@ -49,4 +39,10 @@
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
     background: rgb(63, 65, 174); 
+  }
+
+  .hide-select {
+    visibility: hidden;
+    width: 0%;
+    height: 0%;
   }

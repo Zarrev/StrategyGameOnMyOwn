@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { debounceTime, switchMap } from 'rxjs/operators';
 import { RankTableService } from '../../services/rank-table.service';
@@ -13,6 +13,10 @@ import { FormControl } from '@angular/forms';
 })
 export class RankTableComponent implements OnInit, OnDestroy {
 
+  @Input() fullTable: boolean = true;
+  @Input() selectable: boolean = false;
+  @Output() selected = new EventEmitter<User>();
+  selectedUser: User;
   private subsc: Subscription[] = [];
   private userList: User[] = [];
   queryField: FormControl = new FormControl();
@@ -47,6 +51,13 @@ export class RankTableComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subsc.forEach(x => x.unsubscribe());
+  }
+
+  onClick(selectedUser: User) {
+    if (this.selectable) {      
+      this.selected.emit(selectedUser);
+      this.selectedUser = selectedUser;
+    }
   }
 
 }
