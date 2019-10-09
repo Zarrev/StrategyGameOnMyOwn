@@ -27,4 +27,26 @@
     max-height: 200px;
     overflow-y: scroll;
     width: 90%;
+    // scrollbar-color: #3F68AE #03255F;
 }
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #03255F; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #3F68AE; 
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(63, 65, 174); 
+  }

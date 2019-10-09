@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { fromEvent, Subscription } from 'rxjs';
-import { ajax } from 'rxjs/ajax';
-import { map, filter, debounceTime, distinctUntilChanged, switchMap, switchMapTo } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+import { debounceTime, switchMap } from 'rxjs/operators';
 import { RankTableService } from '../../services/rank-table.service';
 import { User } from 'src/app/core/models/user';
 import { FormControl } from '@angular/forms';

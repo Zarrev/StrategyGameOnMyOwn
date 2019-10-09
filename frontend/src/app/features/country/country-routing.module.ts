@@ -22,6 +22,14 @@ const routes: Routes = [
       {
         path: 'rank-table',
         loadChildren: './../rank-table/rank-table.module#RankTableModule'
+      },
+      {
+        path: 'battle',
+        loadChildren: './../battle/battle.module#BattleModule'
+      },
+      {
+        path: 'attack',
+        loadChildren: './../attack/attack.module#AttackModule'
       }
     ]
   }

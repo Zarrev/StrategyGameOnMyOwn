@@ -8,14 +8,16 @@
     </div>
     <div class="row justify-content-center">
         <div class="jumbotron building list">
-            <hr style="border-color: grey" />
-            <div *ngFor="let user of users">
-                <div class="d-flex justify-content-between">
-                    <p class="col d-inline">{{ user.rank }}.</p>
-                    <p class="col d-inline" style="text-align: left">{{ user.username }}</p>
-                    <p class="col d-inline" style="text-align: right">{{user.point}}</p>
-                </div>
+            <div style="margin-right: 15px;">
                 <hr style="border-color: grey;" />
+                <div *ngFor="let user of users">
+                    <div class="d-flex justify-content-between">
+                        <p class="col d-inline">{{ user.rank }}.</p>
+                        <p class="col d-inline" style="text-align: left">{{ user.username }}</p>
+                        <p class="col d-inline" style="text-align: right">{{user.point}}</p>
+                    </div>
+                    <hr style="border-color: grey;" />
+                </div>
             </div>
         </div>
     </div>
