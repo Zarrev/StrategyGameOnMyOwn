@@ -1,0 +1,30 @@
+.title {
+    color: #FFFFFF;
+    margin-bottom: 2rem;
+}
+
+.searchbox {
+    border-radius: 30px;
+    color: #1C3E76;
+    margin-bottom: 1rem;
+}
+
+.separetor {
+    border-color: #3B7DBD;
+    border-top-width: medium;
+}
+
+.description-row {
+    display: block;
+    margin: auto auto auto 20px;
+}
+
+.list {
+    padding: 0;
+    background-color: #03255F;
+    color: white;
+    font-weight: bold;
+    max-height: 200px;
+    overflow-y: scroll;
+    width: 90%;
+}

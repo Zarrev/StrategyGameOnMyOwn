@@ -129,6 +129,35 @@ namespace backend.BLL.Services
 
             return  new List<string> { this.Ok, "Signed out" };
         }
+
+        public override async Task<List<KeyValuePair<User, KeyValuePair<int, int>>>> GetUsersWithPoints()
+        {
+            var usersWithPoints = new List<KeyValuePair<User, KeyValuePair<int, int>>>();
+            var users = await _repository.GetElements();
+            foreach(var user in users)
+            {
+                var point = (await this._countryService.GetElementByUserId(user.Id)).Points;
+                var rank = await this._countryService.GetRank(user.Id);
+                usersWithPoints.Add(new KeyValuePair<User, KeyValuePair<int, int>>(user, new KeyValuePair<int, int>(point, rank)));
+            }
+
+            return await Task.FromResult(usersWithPoints);
+        }
+
+        public override async Task<List<KeyValuePair<User, KeyValuePair<int, int>>>> GetUsersBySearchWithPoints(string searchtext)
+        {
+            var usersWithPoints = new List<KeyValuePair<User, KeyValuePair<int, int>>>();
+            var users = await this._repository.GetElementBySearch(searchtext);
+            foreach (var user in users)
+            {
+                var point = (await this._countryService.GetElementByUserId(user.Id)).Points;
+                var rank = await this._countryService.GetRank(user.Id);
+                usersWithPoints.Add(new KeyValuePair<User, KeyValuePair<int, int>>(user, new KeyValuePair<int, int>(point, rank)));
+            }
+
+            return await Task.FromResult(usersWithPoints);
+        }
+
         private async Task CreateReleatedCountry(User user, string countryName)
         {
             var country = new Country

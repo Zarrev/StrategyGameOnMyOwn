@@ -1,0 +1,22 @@
+<div class="col w-100 align-middle" style="background-color: #03255F; padding: 2rem 2rem">
+    <div class="description-row">
+        <h1 class="h3 font-weight-bolder title">Rank Table</h1>
+    </div>
+    <div class="row">
+        <input [formControl]="queryField" class="form-control mr-sm-2 searchbox" type="search" placeholder="Search"
+            aria-label="Search">
+    </div>
+    <div class="row justify-content-center">
+        <div class="jumbotron building list">
+            <hr style="border-color: grey" />
+            <div *ngFor="let user of users">
+                <div class="d-flex justify-content-between">
+                    <p class="col d-inline">{{ user.rank }}.</p>
+                    <p class="col d-inline" style="text-align: left">{{ user.username }}</p>
+                    <p class="col d-inline" style="text-align: right">{{user.point}}</p>
+                </div>
+                <hr style="border-color: grey;" />
+            </div>
+        </div>
+    </div>
+</div>

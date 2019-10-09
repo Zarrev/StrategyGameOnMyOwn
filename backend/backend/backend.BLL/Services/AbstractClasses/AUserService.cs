@@ -25,5 +25,8 @@ namespace backend.BLL.Services.AbstractClasses
         public abstract Task<List<string>> Register(string password, string repeatedPassword, User user, string countryName);
         public abstract Task<List<string>> LogOut();
         public abstract string GenerateJwtToken(User user);
+
+        public abstract Task<List<KeyValuePair<User, KeyValuePair<int, int>>>> GetUsersWithPoints();
+        public abstract Task<List<KeyValuePair<User, KeyValuePair<int, int>>>> GetUsersBySearchWithPoints(string searchtext);
     }
 }

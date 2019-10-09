@@ -2,7 +2,9 @@
 using System.Threading.Tasks;
 using backend.BLL.Classes;
 using backend.BLL.Maps.Interfaces;
+using backend.Model.Frontend;
 using backend.Model.Frontend.Account;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -21,6 +23,26 @@ namespace backend.API.Controllers
         {
             _userMap = userMap;
         }
+
+        [HttpGet]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public async Task<ActionResult<List<UserView>>> GetUsers()
+        {
+            return await this._userMap.GetUsers();
+        }
+
+        [HttpGet("{searchText}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public async Task<ActionResult<List<UserView>>> GetUsersBySearch(string searchText)
+        {
+            if (searchText is null)
+            {
+                throw new System.ArgumentNullException(nameof(searchText));
+            }
+
+            return await this._userMap.GetUsersBySearchWithPoints(searchText);
+        }
+
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]

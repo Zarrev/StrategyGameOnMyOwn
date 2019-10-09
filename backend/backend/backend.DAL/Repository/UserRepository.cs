@@ -53,6 +53,17 @@ namespace backend.DAL.Repository
             return await _userManager.FindByIdAsync(elementId);
         }
 
+        public override async Task<List<User>> GetElementBySearch(string searchtext)
+        {
+            var users = _userManager.Users;
+
+            var query = from user in users
+                        where user.UserName.Contains(searchtext)
+                        select user;
+
+            return await Task.FromResult(query.ToList());
+        }
+
         public override async Task<IEnumerable<User>> GetElements()
         {
             return await Task.FromResult(_userManager.Users.ToList());

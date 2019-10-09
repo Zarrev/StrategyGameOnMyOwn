@@ -12,6 +12,7 @@ namespace backend.DAL.Repository.AbstractClasses
         public abstract void Dispose();
 
         public abstract Task<User> GetElementById(string elementId);
+        public abstract Task<List<User>> GetElementBySearch(string searchtext);
 
         public abstract Task<IEnumerable<User>> GetElements();
 

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { BaseService } from 'src/app/core/auth/services/base.service';
+import { BaseService } from 'src/app/shared/services/base.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
 import { Helpers } from 'src/app/utils/helper';
 import { map, catchError } from 'rxjs/operators';

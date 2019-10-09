@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { User } from '../../models/user';
 import { environment } from 'src/environments/environment';
-import { BaseService } from './base.service';
+import { BaseService } from '../../../shared/services/base.service';
 import { Helpers } from 'src/app/utils/helper';
 import * as jwt_decode from 'jwt-decode';
 import { ToastService } from 'src/app/shared/services/toast.service';

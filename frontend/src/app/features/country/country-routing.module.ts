@@ -18,6 +18,10 @@ const routes: Routes = [
       {
         path: 'army',
         loadChildren: './../army/army.module#ArmyModule'
+      },
+      {
+        path: 'rank-table',
+        loadChildren: './../rank-table/rank-table.module#RankTableModule'
       }
     ]
   }
