@@ -16,11 +16,12 @@ namespace backend.BLL.Services.Interfaces
         Task<Country> FinishRound(string userId);
         Task Build(string userId, int buildingType);
         Task Develop(string userId, int developType);
-        Task<string> HireMercenary(string userId, int LaserShark, int AssaultSeaDog, int BattleSeahorse);
+        Task<string> HireMercenary(string userId, int LaserShark, int AssaultSeaDog, int BattleSeahorse, bool retuners = false);
 
         Task<int> GetDevRound(string userId);
         Task<int> GetBuildRound(string userId);
         Task<int> GetBuildingName(string userId);
         Task<int> GetDevelopingName(string userId);
+        Task GoInToTheBattle(MercenaryRequest army, string userId);
     }
 }

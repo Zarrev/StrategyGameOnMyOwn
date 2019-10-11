@@ -27,5 +27,7 @@ namespace backend.DAL.Repository.AbstractClasses
         public abstract Task UpdateElement(User element);
 
         public abstract Task<IdentityResult> InsertElement(User element, string password);
+
+        public abstract Task<User> FindByName(string name);
     }
 }

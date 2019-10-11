@@ -7,6 +7,8 @@ import { ToastService } from 'src/app/shared/services/toast.service';
 import { Helpers } from 'src/app/utils/helper';
 import { map, catchError } from 'rxjs/operators';
 import { MercenaryRequest } from '../models/mercenary-request';
+import { User } from 'src/app/core/models/user';
+import { Battle } from '../../battle/models/battle';
 
 @Injectable({
   providedIn: 'root'
@@ -75,7 +77,7 @@ export class CountryService extends BaseService {
   }
 
   getBuildingName(): Observable<number> {
-    return this.http.get<{buildingname: number}>(environment.apiUrl + this.specAPI + '/buildingname', super.header()).pipe(
+    return this.http.get<{ buildingname: number }>(environment.apiUrl + this.specAPI + '/buildingname', super.header()).pipe(
       map(resp => {
         return resp.buildingname;
       }),
@@ -84,14 +86,14 @@ export class CountryService extends BaseService {
   }
 
   getDevelopingName(): Observable<number> {
-    return this.http.get<{developingname: number}>(environment.apiUrl + this.specAPI + '/developingname', super.header()).pipe(
+    return this.http.get<{ developingname: number }>(environment.apiUrl + this.specAPI + '/developingname', super.header()).pipe(
       map(resp => {
         return resp.developingname;
       }),
       catchError(error => super.handleError(error))
     );
   }
-  
+
   getInhibitant(): Observable<number> {
     return this.http.get<{ inhibitant: number }>(environment.apiUrl + this.specAPI + '/inhabitant', super.header()).pipe(
       map(response => {
@@ -112,34 +114,38 @@ export class CountryService extends BaseService {
 
   getBuildings(): Observable<{ flowControllNumber: number, reefCastleNumber: number }> {
     return this.http.get<{ flowControllNumber: number, reefCastleNumber: number }>
-    (environment.apiUrl + this.specAPI + '/buildings', super.header()).pipe(
-      map(response => {
-        return response;
-      }),
-      catchError(error => super.handleError(error))
-    );
+      (environment.apiUrl + this.specAPI + '/buildings', super.header()).pipe(
+        map(response => {
+          return response;
+        }),
+        catchError(error => super.handleError(error))
+      );
   }
 
-  getDevelopments(): Observable<{ mudTractor: boolean, sludgeharvester: boolean, coralWall: boolean,
-    sonarGun: boolean, underwaterMaterialArts: boolean, alchemy: boolean }> {
-    return this.http.get<{ mudTractor: boolean, sludgeharvester: boolean, coralWall: boolean,
-      sonarGun: boolean, underwaterMaterialArts: boolean, alchemy: boolean }>
-    (environment.apiUrl + this.specAPI + '/developments', super.header()).pipe(
-      map(response => {
-        return response;
-      }),
-      catchError(error => super.handleError(error))
-    );
+  getDevelopments(): Observable<{
+    mudTractor: boolean, sludgeharvester: boolean, coralWall: boolean,
+    sonarGun: boolean, underwaterMaterialArts: boolean, alchemy: boolean
+  }> {
+    return this.http.get<{
+      mudTractor: boolean, sludgeharvester: boolean, coralWall: boolean,
+      sonarGun: boolean, underwaterMaterialArts: boolean, alchemy: boolean
+    }>
+      (environment.apiUrl + this.specAPI + '/developments', super.header()).pipe(
+        map(response => {
+          return response;
+        }),
+        catchError(error => super.handleError(error))
+      );
   }
 
   getMercenaries(): Observable<{ seaDogNumber: number, battleSeahorse: number, laserShark: number }> {
     return this.http.get<{ seaDogNumber: number, battleSeahorse: number, laserShark: number }>
-    (environment.apiUrl + this.specAPI + '/mercenaries', super.header()).pipe(
-      map(response => {
-        return response;
-      }),
-      catchError(error => super.handleError(error))
-    );
+      (environment.apiUrl + this.specAPI + '/mercenaries', super.header()).pipe(
+        map(response => {
+          return response;
+        }),
+        catchError(error => super.handleError(error))
+      );
   }
 
   getPoints(): Observable<number> {
@@ -191,14 +197,12 @@ export class CountryService extends BaseService {
   }
 
   postHireAction(mercanryList: MercenaryRequest): Observable<any> {
-    return this.http.post<{message: string}>(environment.apiUrl + this.specAPI + '/hire', mercanryList,
-     { headers: super.header().headers, observe: 'response'}).pipe(
-       map(response => {
-         if (!response.ok) {
-            super.handleError(response);
-         }
-       }),
-      catchError(error => super.handleError(error))
-    );
+    return this.http.post<{ message: string }>(environment.apiUrl + this.specAPI + '/hire', mercanryList,
+      { headers: super.header().headers, observe: 'response' }).pipe(
+        map(response => {
+          console.log(response);
+        }),
+        catchError(error => super.handleError(error))
+      );
   }
 }

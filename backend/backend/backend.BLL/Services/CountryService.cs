@@ -12,10 +12,12 @@ namespace backend.BLL
     public class CountryService: ICountryService
     {
         private readonly ICountryRepository _repository;
+        private readonly IBattleService _battleService;
 
-        public CountryService(ICountryRepository repository)
+        public CountryService(ICountryRepository repository, IBattleService battleService)
         {
             _repository = repository;
+            _battleService = battleService;
         }
 
         public async Task<int> GetRank(string userId)
@@ -36,6 +38,16 @@ namespace backend.BLL
         public async Task<Country> GetElementByUserId(string userId)
         {
             return await _repository.getElementByUserId(userId);
+        }
+
+        public async Task GoInToTheBattle(MercenaryRequest army, string userId)
+        {
+            var country = await this.GetElementByUserId(userId);
+            country.AssaultSeaDog -= army.AssaultSeaDog;
+            country.BattleSeahorse -= army.BattleSeahorse;
+            country.LaserShark -= army.LaserShark;
+
+            await this.UpdateElement(country);
         }
 
         public async Task InsertElement(Country element)
@@ -123,10 +135,47 @@ namespace backend.BLL
             country.Coral -= CalcMercenaryEatingCost(country);
             country = DevelopmentReadiness(country);
             country = BuildingRediness(country);
-            //battle
+            country = await this.Battle(userId, country);
             country.Points = GetActualPointsForCountry(country);
 
             await UpdateElement(country);
+
+            return await Task.FromResult(country);
+        }
+
+        private async Task<Country> Battle(string userId, Country country)
+        {
+            var battleResults = await this._battleService.Fight(userId, await this.GetDefenseValue(userId));
+            foreach (var battleResult in battleResults)
+            {
+                if (battleResult.WinnerId != null)
+                {
+                    MercenaryRequest actualArmy = null;
+                    if (!battleResult.WinnerId.Equals(userId))
+                    {
+                        actualArmy = new MercenaryRequest
+                        {
+                            AssaultSeaDog = battleResult.Battle.AssaultSeaDog,
+                            BattleSeahorse = battleResult.Battle.BattleSeahorse,
+                            LaserShark = battleResult.Battle.LaserShark
+                        };
+                        MercenaryRequest loss = this._battleService.GetLoss(actualArmy);
+                        await this.HireMercenary(userId, loss.LaserShark, loss.AssaultSeaDog, loss.BattleSeahorse, true);
+                    } else
+                    {
+                        actualArmy = new MercenaryRequest
+                        {
+                            AssaultSeaDog = battleResult.Battle.EnemyAssaultSeaDog,
+                            BattleSeahorse = battleResult.Battle.EnemyBattleSeahorse,
+                            LaserShark = battleResult.Battle.EnemyLaserShark
+                        };
+                        MercenaryRequest loss = this._battleService.GetLoss(actualArmy);
+                        var capturedTreasures = this._battleService.Capture(await this.GetElementByUserId(battleResult.LoserId));
+                        country.Coral += capturedTreasures[1];
+                        country.Pearl += capturedTreasures[0];
+                    }
+                }
+            }
 
             return await Task.FromResult(country);
         }
@@ -168,10 +217,10 @@ namespace backend.BLL
             return await GetElementByUserId(userId).ContinueWith(task => task.Result.BuildRounds);
         }
 
-        public async Task<string> HireMercenary(string userId, int LaserShark, int AssaultSeaDog, int BattleSeahorse)
+        public async Task<string> HireMercenary(string userId, int LaserShark, int AssaultSeaDog, int BattleSeahorse, bool returners = false)
         {
             var country = await this.GetElementByUserId(userId);
-            if (CanHire(country, LaserShark, AssaultSeaDog, BattleSeahorse))
+            if (CanHire(country, LaserShark, AssaultSeaDog, BattleSeahorse) || returners)
             {
                 country.LaserShark += LaserShark;
                 country.AssaultSeaDog += AssaultSeaDog;

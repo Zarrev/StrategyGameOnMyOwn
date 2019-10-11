@@ -1,30 +1,51 @@
-<!-- JUST TESTING PURPOSE -->
 <div class="row d-flex justify-content-center">
     <div class="jumbotron building">
-        <div class="col pointer" [ngClass]="{'selected': selected == 1}">
-            <!-- reefcastle -->
-            <img src="../../../../../assets/images/buildings/undersea_game-07.png" alt="Reefcastle" />
-            <h1 class="h4 font-weight-bolder white-text">Reefcastle
-            </h1>
-            <p class="white-text">Add +50 inhabitant.</p>
-            <p class="white-text">It makes +200 Coral/round</p>
-            <p class="font-weight-light white-text">45 Pearl/piece</p>
-        </div>
-    </div>
-    <div class="jumbotron building">
         <div class="col pointer" [ngClass]="{'selected': selected == 0}">
-            <!-- flowcontroller -->
-            <img src="../../../../../assets/images/buildings/undersea_game-05.png" alt="Flowcontroller" />
-            <h1 class="h4 font-weight-bolder white-text">Flowcontroller
-            </h1>
-            <p class="white-text">It gives +200 mercenary's places</p>
-            <p class="font-weight-light white-text">35 Pearl/piece</p>
+            <!-- LaserShark -->
+            <div class="row justify-content-between form-group">
+                <div class="div-img">
+                    <img src="../../../../../assets/images/icons/007-shark.svg" alt="LaserShark" />
+                </div>
+                <div class="col">
+                    <label for="laserSharkRanger" class="row font-weight-light white-text text-right">LaserShark units:
+                        {{values.laserShark}}</label>
+                    <div class="row">
+                        <input id="laserSharkRanger" #laserSharkRanger type="range" [min]="0"
+                            [max]="maxRanges.laserShark" (input)="set('laserShark', laserSharkRanger.value)"
+                            class="slider" [value]="values.laserShark" (mouseup)="send()">
+                    </div>
+                </div>
+            </div>
+            <!-- AssaultSeaDog -->
+            <div class="row justify-content-between form-group">
+                <div class="div-img">
+                    <img src="../../../../../assets/images/icons/025-seal.svg" alt="AssaultSeaDog" />
+                </div>
+                <div class="col form-group">
+                    <label for="assaultSeaDogRanger" class="row font-weight-light white-text text-right">AssaultSeaDog units:
+                        {{values.assaultSeaDog}}</label>
+                    <div class="row">
+                        <input id="assaultSeaDogRanger" #assaultSeaDogRanger type="range" [min]="0"
+                            [max]="maxRanges.assaultSeaDog" (input)="set('assaultSeaDog', assaultSeaDogRanger.value)"
+                            class="slider" [value]="values.assaultSeaDog" (mouseup)="send()">
+                    </div>
+                </div>
+            </div>
+            <!-- BattleSeahorse -->
+            <div class="row justify-content-between form-group">
+                <div class="div-img">
+                    <img src="../../../../../assets/images/icons/013-seahorse.svg" alt="BattleSeahorse" />
+                </div>
+                <div class="col form-group">
+                    <label for="battleSeahorseRanger" class="row font-weight-light white-text text-right">BattleSeahorse units:
+                        {{values.battleSeahorse}}</label>
+                    <div class="row">
+                        <input id="battleSeahorseRanger" #battleSeahorseRanger type="range" [min]="0"
+                            [max]="maxRanges.battleSeahorse" (input)="set('battleSeahorse', battleSeahorseRanger.value)"
+                            class="slider" [value]="values.battleSeahorse" (mouseup)="send()">
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
-<div class="row description-row" style="padding: 2rem; text-align: center;">
-    <hr class="my-4 separetor">
-    <!-- <button class="btn btn-primary btn-lg" style="margin-right: 1rem;" href="#" role="button" [disabled]="selected < 0"
-        (click)="buy()">Buy it</button>
-    <button class="btn btn-primary btn-lg" href="#" role="button" (click)="cancel()">Cancel</button> -->
 </div>

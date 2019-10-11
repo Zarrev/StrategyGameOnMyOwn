@@ -83,5 +83,10 @@ namespace backend.DAL.Repository
         {
             throw new NotImplementedException("Currently this function is unnecessary.");
         }
+
+        public override async Task<User> FindByName(string name)
+        {
+            return await _userManager.FindByNameAsync(name);
+        }
     }
 }

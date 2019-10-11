@@ -28,5 +28,7 @@ namespace backend.BLL.Services.AbstractClasses
 
         public abstract Task<List<KeyValuePair<User, KeyValuePair<int, int>>>> GetUsersWithPoints();
         public abstract Task<List<KeyValuePair<User, KeyValuePair<int, int>>>> GetUsersBySearchWithPoints(string searchtext);
+
+        public abstract Task<User> FindByName(string name);
     }
 }

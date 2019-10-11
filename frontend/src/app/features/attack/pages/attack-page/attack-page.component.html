@@ -1,13 +1,25 @@
 <div class="col w-100 align-middle" style="background-color: #03255F; padding: 2rem 2rem">
     <div class="description-row">
-        <h1 class="h3 font-weight-bolder title">Rank Table</h1>
+        <h1 class="h3 font-weight-bolder title">Attack</h1>
     </div>
     <div class="row">
         <div class="col">
+            <div class="description-row">
+                <h1 class="h5 font-weight-bold title">1. Select who is your target</h1>
+            </div>
             <app-rank-table [fullTable]="false" [selectable]="true" (selected)="onSelected($event)"></app-rank-table>
         </div>
         <div class="col">
-            <app-attack></app-attack>
+            <div class="description-row">
+                <h1 class="h5 font-weight-bold title">2. Set your army</h1>
+            </div>
+            <app-attack (finalOutput)="onSelectArmy($event)"></app-attack>
         </div>
     </div>
+    <div class="row description-row" style="padding: 2rem; text-align: center;">
+            <hr class="my-4 separetor">
+            <button class="btn btn-primary btn-lg" style="margin-right: 1rem;" href="#" role="button"
+                [disabled]="army == null || enemy == null" (click)="start()">Attack</button>
+            <button class="btn btn-primary btn-lg" href="#" role="button" (click)="cancel()">Cancel</button>
+        </div>
 </div>

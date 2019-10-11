@@ -54,8 +54,6 @@ export class DevelopmentComponent implements OnInit, OnDestroy {
   }
 
   cancel(): void {
-    console.log(this.name);
-    console.log(this.remaining);
     this.router.navigate(['/']);
   }
 

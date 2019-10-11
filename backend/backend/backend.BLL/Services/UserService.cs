@@ -158,6 +158,11 @@ namespace backend.BLL.Services
             return await Task.FromResult(usersWithPoints);
         }
 
+        public override async Task<User> FindByName(string name)
+        {
+            return await this._repository.FindByName(name);
+        }
+
         private async Task CreateReleatedCountry(User user, string countryName)
         {
             var country = new Country

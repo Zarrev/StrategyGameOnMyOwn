@@ -1,4 +1,5 @@
 ﻿using backend.Model;
+using backend.Model.Backend;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,13 +8,14 @@ namespace backend.DAL
     public class ApplicationDbContext : IdentityDbContext
     {
         public DbSet<Country> Countries { get; set; }
+        public DbSet<Battle> Battles { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(
                 " Server = (localdb)\\MSSQLLocalDB;" +
                 " Database = UnderSeaDataBase;" +
                 " Trusted_Connection = True;" +
-                " MultipleActiveResultSets = true;"); 
+                " MultipleActiveResultSets = true;");
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -34,6 +36,7 @@ namespace backend.DAL
             builder.Entity<Country>().Property(c => c.Points).HasDefaultValue(100);
 
             builder.Entity<User>().HasOne(u => u.Country).WithOne(c => c.User).HasForeignKey<Country>(c => c.UserId);
+            builder.Entity<User>().HasMany(u => u.Battles).WithOne(b => b.User);
         }
 
 

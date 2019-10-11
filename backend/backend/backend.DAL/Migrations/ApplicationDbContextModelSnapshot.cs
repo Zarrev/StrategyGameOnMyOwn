@@ -185,6 +185,36 @@ namespace backend.DAL.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("backend.Model.Backend.Battle", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("AssaultSeaDog");
+
+                    b.Property<int>("BattleSeahorse");
+
+                    b.Property<int>("EnemyAssaultSeaDog");
+
+                    b.Property<int>("EnemyBattleSeahorse");
+
+                    b.Property<string>("EnemyId");
+
+                    b.Property<int>("EnemyLaserShark");
+
+                    b.Property<int>("LaserShark");
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EnemyId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Battles");
+                });
+
             modelBuilder.Entity("backend.Model.Country", b =>
                 {
                     b.Property<string>("Id")
@@ -304,6 +334,17 @@ namespace backend.DAL.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("backend.Model.Backend.Battle", b =>
+                {
+                    b.HasOne("backend.Model.User", "Enemy")
+                        .WithMany()
+                        .HasForeignKey("EnemyId");
+
+                    b.HasOne("backend.Model.User", "User")
+                        .WithMany("Battles")
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("backend.Model.Country", b =>
