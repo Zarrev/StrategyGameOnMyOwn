@@ -24,8 +24,6 @@ export class RankTableComponent implements OnInit, OnDestroy {
   constructor(private rankTableService: RankTableService) {
     this.subsc.push(this.rankTableService.getUsers().subscribe(users => {
       this.userList = users.sort((a, b) => a.point > b.point ? -1 : 1);
-      console.log(this.userList);
-      console.log(users);
     }));
   }
 
@@ -38,7 +36,7 @@ export class RankTableComponent implements OnInit, OnDestroy {
       .pipe(
         debounceTime(200),
         switchMap(searchText => {
-          if (searchText !== undefined && searchText !== null && searchText !== ''){
+          if (searchText !== undefined && searchText !== null && searchText !== '') {
             return this.rankTableService.GetUsersBySearchWithPoints(searchText);
           }
           return this.rankTableService.getUsers();
@@ -54,7 +52,7 @@ export class RankTableComponent implements OnInit, OnDestroy {
   }
 
   onClick(selectedUser: User) {
-    if (this.selectable) {      
+    if (this.selectable) {
       this.selected.emit(selectedUser);
       this.selectedUser = selectedUser;
     }

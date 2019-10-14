@@ -11,7 +11,7 @@ namespace backend.BLL.Services.Interfaces
     public interface IBattleService: IBaseService<Battle, string>
     {
         Task<List<Battle>> GetElementsByUserId(string userId);
-        Task<List<BattleResult>> Fight(string userId, int defensValue);
+        Task<List<BattleResult>> Fight(string userId);
         MercenaryRequest GetLoss(MercenaryRequest army);
         List<int> Capture(Country country);
     }

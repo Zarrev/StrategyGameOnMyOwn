@@ -10,9 +10,7 @@ import { environment } from 'src/environments/environment';
 import { map, catchError } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class BattleService extends BaseService {
 
   private _battles = new BehaviorSubject<Battle[]>([]);
@@ -25,21 +23,20 @@ export class BattleService extends BaseService {
     return this._battles.asObservable();
   }
 
-  postBattleAction(army: MercenaryRequest, enemy: User) {
+  postBattleAction(army: MercenaryRequest, enemy: User): Observable<any> {
     const battleForPost: Battle = {
-      AssaultSeaDog: army.AssaultSeaDog as number,
-      LaserShark: army.LaserShark as number,
-      BattleSeahorse: army.BattleSeahorse as number,
+      AssaultSeaDog: army.AssaultSeaDog,
+      LaserShark: army.LaserShark,
+      BattleSeahorse: army.BattleSeahorse,
       EnemyName: enemy.username
     };
-    console.log(battleForPost);
-    return this.http.post<Battle>(environment.apiUrl + 'battle', battleForPost, super.header()).pipe(
+    return this.http.post<Battle>(environment.apiUrl + 'battle', JSON.stringify(battleForPost), super.header()).pipe(
         catchError(error => super.handleError(error))
       );
   }
 
   getBattles(): Observable<Battle[]> {
-    return this.http.get<Battle[]>(environment.apiUrl + '/battle', super.header()).pipe(
+    return this.http.get<Battle[]>(environment.apiUrl + 'battle', super.header()).pipe(
       map(response => {
         this._battles.next(response);
         return response;

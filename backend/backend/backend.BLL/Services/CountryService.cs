@@ -145,7 +145,7 @@ namespace backend.BLL
 
         private async Task<Country> Battle(string userId, Country country)
         {
-            var battleResults = await this._battleService.Fight(userId, await this.GetDefenseValue(userId));
+            var battleResults = await this._battleService.Fight(userId);
             foreach (var battleResult in battleResults)
             {
                 if (battleResult.WinnerId != null)
@@ -170,9 +170,17 @@ namespace backend.BLL
                             LaserShark = battleResult.Battle.EnemyLaserShark
                         };
                         MercenaryRequest loss = this._battleService.GetLoss(actualArmy);
-                        var capturedTreasures = this._battleService.Capture(await this.GetElementByUserId(battleResult.LoserId));
+                        Country enemyCountry = await this.GetElementByUserId(battleResult.LoserId);
+                        var capturedTreasures = this._battleService.Capture(enemyCountry);
                         country.Coral += capturedTreasures[1];
                         country.Pearl += capturedTreasures[0];
+                        enemyCountry.Coral -= capturedTreasures[1];
+                        enemyCountry.Pearl -= capturedTreasures[0];
+                        enemyCountry.AssaultSeaDog -= loss.AssaultSeaDog;
+                        enemyCountry.BattleSeahorse -= loss.BattleSeahorse;
+                        enemyCountry.LaserShark -= loss.LaserShark;
+                        await this.UpdateElement(enemyCountry);
+                        await this.HireMercenary(userId, battleResult.Battle.LaserShark, battleResult.Battle.AssaultSeaDog, battleResult.Battle.BattleSeahorse, true);
                     }
                 }
             }

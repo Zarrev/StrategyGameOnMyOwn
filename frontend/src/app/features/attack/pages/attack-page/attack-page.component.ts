@@ -4,6 +4,8 @@ import { SelectedArmy } from '../../models/selected-army.interface';
 import { Router } from '@angular/router';
 import { MercenaryRequest } from 'src/app/features/country/models/mercenary-request';
 import { BattleService } from 'src/app/features/battle/services/battle.service';
+import { Subscription } from 'rxjs';
+import { CountryService } from 'src/app/features/country/services/country.service';
 
 
 @Component({
@@ -15,8 +17,9 @@ export class AttackPageComponent implements OnInit {
 
   private selectedUser: User = null;
   private selectedArmy: SelectedArmy = null;
+  private subsc: Subscription[] = [];
 
-  constructor(private router: Router, private battleService: BattleService) { }
+  constructor(private router: Router, private battleService: BattleService, private countryService: CountryService) { }
 
   ngOnInit() {
   }
@@ -35,7 +38,7 @@ export class AttackPageComponent implements OnInit {
       BattleSeahorse: this.selectedArmy.battleSeahorse,
       LaserShark: this.selectedArmy.laserShark
     };
-    this.battleService.postBattleAction(mercenaryRequest, this.selectedUser);
+    this.subsc.push(this.battleService.postBattleAction(mercenaryRequest, this.selectedUser).subscribe(resp => console.log(resp)));
     this.cancel();
   }
 

@@ -1,12 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { BattleService } from '../../services/battle.service';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { Battle } from 'src/app/features/battle/models/battle';
 
 @Component({
   selector: 'app-battle',
   templateUrl: './battle.component.html',
-  styleUrls: ['./battle.component.scss']
+  styleUrls: ['./battle.component.scss'],
+  providers: [BattleService]
 })
 export class BattleComponent implements OnInit, OnDestroy {
 

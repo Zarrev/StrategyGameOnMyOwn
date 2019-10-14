@@ -52,6 +52,16 @@ namespace backend.BLL.Services
             await _repository.Save();
         }
 
+        private double CalcDefenseForBattle(Battle battle)
+        {
+            double attackValue = 0;
+            attackValue += 2 * battle.EnemyAssaultSeaDog;
+            attackValue += 6 * battle.EnemyBattleSeahorse;
+            attackValue += 5 * battle.EnemyLaserShark;
+
+            return attackValue;
+        }
+
         private double CalcAttackForBattle(Battle battle)
         {
             double attackValue = 0;
@@ -59,23 +69,25 @@ namespace backend.BLL.Services
             attackValue += 2 * battle.BattleSeahorse;
             attackValue += 5 * battle.LaserShark;
 
-            Random random = new Random();
-            double moralEffect = (random.NextDouble()*10 - 5) * attackValue;
+            Random randomm = new Random();
+            var random = ((randomm.NextDouble() * 10) - 5) / 100;
+            double moralEffect = random * attackValue;
 
             return attackValue + moralEffect;
         }
-        public async Task<List<BattleResult>> Fight(string userId, int defensValue)
+        public async Task<List<BattleResult>> Fight(string userId)
         {
             var results = new List<BattleResult>();
             var battles = await this.GetElementsByUserId(userId);
             foreach (var battle in battles)
             {
                 var attackValue = CalcAttackForBattle(battle);
-                if (defensValue > attackValue)
+                var defenseValue = CalcDefenseForBattle(battle);
+                if (defenseValue > attackValue)
                 {
                     results.Add(new BattleResult { Battle = battle, WinnerId = battle.EnemyId, LoserId = battle.UserId });
                     await this.DeleteElement(battle.Id);
-                } else if (defensValue < attackValue)
+                } else if (defenseValue < attackValue)
                 {
                     results.Add(new BattleResult { Battle = battle, WinnerId = battle.UserId, LoserId = battle.EnemyId });
                     await this.DeleteElement(battle.Id);
@@ -92,22 +104,40 @@ namespace backend.BLL.Services
         public MercenaryRequest GetLoss(MercenaryRequest army)
         {
             int sumLoss = (int) Math.Round((army.AssaultSeaDog + army.BattleSeahorse + army.LaserShark) * 0.1);
-            int killer = 0;        
+
+            int killer = 0;
+            bool killed = false;
+
             for (int i = 1; i <= sumLoss; i++)
             {
-                if (killer == 0)
+                if (killer == 0 && !killed)
                 {
-                    army.AssaultSeaDog--;
+                    if (army.AssaultSeaDog != 0)
+                    {
+                        army.AssaultSeaDog--;
+                        killed = true;
+                    }
                     killer = 1;
-                } else if (killer == 1)
+                }
+                if (killer == 1 && !killed)
                 {
-                    army.BattleSeahorse--;
+                    if (army.BattleSeahorse != 0)
+                    {
+                        army.BattleSeahorse--;
+                        killed = true;
+                    }
                     killer = 2;
-                } else
+                }
+                if( killer == 2 && !killed)
                 {
-                    army.LaserShark--;
+                    if (army.LaserShark != 0)
+                    {
+                        army.LaserShark--;
+                        killed = true;
+                    }
                     killer = 0;
                 }
+                killed = false;
             }
 
             return army;

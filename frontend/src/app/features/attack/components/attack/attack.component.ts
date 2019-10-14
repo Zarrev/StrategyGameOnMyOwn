@@ -16,9 +16,9 @@ export class AttackComponent implements OnInit, OnDestroy {
   @Output() finalOutput = new EventEmitter<SelectedArmy>();
 
   constructor(private countryService: CountryService) {
-    this.countryService.getMercenaries().subscribe(values => {
+    this.subsc.push(this.countryService.getMercenaries().subscribe(values => {
       this.maxRanges = {laserShark: values.laserShark, assaultSeaDog: values.seaDogNumber, battleSeahorse: values.battleSeahorse};
-    });
+    }));
   }
 
   set(property: string, value: number) {

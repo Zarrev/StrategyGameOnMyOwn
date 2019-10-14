@@ -22,6 +22,7 @@ export class MenuComponent implements OnInit, OnDestroy {
 
   next() {
     this.subsc.push(this.countryService.next().subscribe(resp => console.log(resp)));
+    this.subsc.push(this.countryService.getMercenaries().subscribe());
   }
 
 }

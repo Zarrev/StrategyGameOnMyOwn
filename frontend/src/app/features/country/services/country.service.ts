@@ -19,9 +19,16 @@ export class CountryService extends BaseService {
   private _round = new BehaviorSubject<number>(0);
   private _rank = new BehaviorSubject<number>(0);
   private _country = new BehaviorSubject<Country>(null);
+  private _mercenaries = new BehaviorSubject<{ seaDogNumber: number, battleSeahorse: number, laserShark: number }>(
+    { seaDogNumber: 0, battleSeahorse: 0, laserShark: 0 }
+  );
 
   constructor(private http: HttpClient, toastService: ToastService, helper: Helpers) {
     super(helper, toastService);
+  }
+
+  get mercenaries(): Observable<{ seaDogNumber: number, battleSeahorse: number, laserShark: number }> {
+    return this._mercenaries.asObservable();
   }
 
   get round(): Observable<number> {
@@ -142,6 +149,7 @@ export class CountryService extends BaseService {
     return this.http.get<{ seaDogNumber: number, battleSeahorse: number, laserShark: number }>
       (environment.apiUrl + this.specAPI + '/mercenaries', super.header()).pipe(
         map(response => {
+          this._mercenaries.next(response);
           return response;
         }),
         catchError(error => super.handleError(error))

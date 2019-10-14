@@ -5,6 +5,7 @@ import { AttackRoutingModule } from './attack-routing.module';
 import { AttackPageComponent } from './pages/attack-page/attack-page.component';
 import { AttackComponent } from './components/attack/attack.component';
 import { RankTableModule } from '../rank-table/rank-table.module';
+import { BattleModule } from '../battle/battle.module';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { RankTableModule } from '../rank-table/rank-table.module';
   imports: [
     CommonModule,
     AttackRoutingModule,
-    RankTableModule
+    RankTableModule,
+    BattleModule
   ]
 })
 export class AttackModule { }

@@ -32,7 +32,7 @@ namespace backend.BLL.Maps
 
         public async Task<List<BattleView>> GetAllByUserId(string userId)
         {
-            return DomainToViewModel(await this._service.GetElementsByUserId(userId));
+            return await DomainToViewModel(await this._service.GetElementsByUserId(userId));
         }
 
         public Task Delete(string elementViewModelId)
@@ -78,16 +78,18 @@ namespace backend.BLL.Maps
             return viewModel;
         }
 
-        private List<BattleView> DomainToViewModel(List<Battle> elementModels)
+        private async Task<List<BattleView>> DomainToViewModel(List<Battle> elementModels)
         {
             var viewModels = new List<BattleView>();
 
             foreach (var model in elementModels)
             {
+                model.User = await _userService.GetElementById(model.UserId);
+                model.Enemy = await _userService.GetElementById(model.EnemyId);
                 viewModels.Add(InitBattleView(model));
             }
 
-            return viewModels;
+            return await Task.FromResult(viewModels);
         }
 
         private async Task<Battle> InitBattle(BattleView model, string userId)

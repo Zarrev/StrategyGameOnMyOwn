@@ -75,6 +75,7 @@ export class ArmyComponent implements OnInit, OnDestroy {
   }
 
   cancel(): void {
+    this.subsc.push(this.countryService.getMercenaries().subscribe());
     this.router.navigate(['/']);
   }
 }

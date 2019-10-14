@@ -21,11 +21,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.subscription.push(this.countryService.getUserCountry().subscribe(country => console.log('Country has got!')));
       this.subscription.push(this.countryService.country.subscribe(country => this._country = country));
     }));
-    this.subscription.push(this.countryService.getCurrentRound().subscribe(round => console.log('Round has stepped!')));
+    this.subscription.push(this.countryService.getCurrentRound().subscribe(round => console.log('Getted Round')));
     this.subscription.push(this.countryService.getRank().subscribe(rank => console.log('Your rank is ' + rank)));
+    this.subscription.push(this.countryService.getMercenaries().subscribe());
   }
 
   ngOnInit() {
+  }
+
+  get mercenaries(): Observable<{ seaDogNumber: number, battleSeahorse: number, laserShark: number }> {
+    return this.countryService.mercenaries;
   }
 
   get round(): Observable<number> {

@@ -30,16 +30,8 @@ namespace backend.API.Controllers
         }
 
         // POST
-        [HttpPost("/attack")]
-        public async Task<IActionResult> PostBattle([FromBody] BattleView battle)
-        {
-            await _battleMap.Create(battle, HttpContext.User.Identity.Name);
-            return Ok();
-        }
-
-        // POST
         [HttpPost]
-        public async Task<IActionResult> PostBattlel( BattleView battle)
+        public async Task<ActionResult<BattleView>> PostBattlel(BattleView battle)
         {
             await _battleMap.Create(battle, HttpContext.User.Identity.Name);
             return Ok();
