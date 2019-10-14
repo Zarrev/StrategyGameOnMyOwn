@@ -7,7 +7,7 @@
         <div style="margin-right: 15px;">
             <hr style="border-color: grey;" />
             <div *ngFor="let user of users" (click)="onClick(user)">
-                <div class="d-flex justify-content-between">
+                <div *ngIf="(!meOnList && (me | async).username != user.username) || meOnList" class="d-flex justify-content-between">
                     <p *ngIf="fullTable" class="col d-inline">{{ user.rank }}.</p>
                     <p class="col d-inline" style="text-align: left">{{ user.username }}</p>
                     <p *ngIf="fullTable" class="col d-inline" style="text-align: right">{{user.point}}</p>

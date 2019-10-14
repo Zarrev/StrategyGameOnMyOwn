@@ -35,6 +35,10 @@ export class AuthenticationService extends BaseService {
     return this.currentUserSubject.value;
   }
 
+  get user(): Observable<User> {
+    return this.currentUserSubject.asObservable();
+  }
+
   logout() {
     this.helperLogOut();
   }
